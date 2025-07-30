@@ -1,0 +1,187 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    background-color: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.navbar.scrolled {
+    padding: 15px 0;
+    background-color: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.navbar-logo img {
+    height: 60px;
+}
+
+.logo-text {
+    letter-spacing: 1px;
+}
+
+.logo-dot {
+    font-size: 28px;
+    margin-left: 2px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    font-size: 16px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #8ec921;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #8ec921;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-cta {
+    background-color: #8ec921;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(142, 201, 33, 0.3);
+}
+
+.nav-cta:hover {
+    background-color: #1d8236;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(142, 201, 33, 0.4);
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.line-1 {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.line-2 {
+    opacity: 0;
+}
+
+.line-3 {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .navbar-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(20, 20, 20, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .navbar-links.active {
+        right: 0;
+    }
+
+    .nav-link {
+        margin: 15px 0;
+        font-size: 18px;
+    }
+
+    .nav-cta {
+        margin: 20px 0 0 0;
+    }
+}
+
+/* Add these styles to your existing NavBar.css */
+
+.nav-link.active {
+    color: #8ec921;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* For mobile menu active state */
+@media (max-width: 768px) {
+    .nav-link.active {
+        color: #8ec921;
+        font-weight: 600;
+    }
+
+    .nav-link.active::after {
+        width: 30px; /* Shorter underline for mobile */
+    }
+}
