@@ -675,246 +675,568 @@ const MaterialDocPage = () => {
     }, [materialId]); // Add materialId as dependency
 
     return (
-        <div className="material-doc-container">
-            <button className="back-button" onClick={() => navigate(-1)}>
-                &larr; Back to Materials
-            </button>
+        <div className="luxury-material-doc">
+            {/* Luxury Back Button */}
+            <motion.button
+                className="luxury-back-button"
+                onClick={() => navigate(-1)}
+                whileHover={{ x: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M15 18L9 12L15 6"
+                        stroke="#8ec921"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                    />
+                </svg>
+                Back to Collection
+            </motion.button>
 
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="material-doc-header">
-                <div className="material-image-container">
-                    <img src={material.image} alt={material.name} />
-                </div>
-                <div className="material-header-text">
-                    <h1>{material.name}</h1>
-                    <p className="material-category">
-                        {material.categoryTitle}
-                    </p>
-                    <p className="material-description">
-                        {material.description}
-                    </p>
-                    <div className="material-meta">
-                        <span className="price">{material.price}</span>
-                        <span className="lead-time">
-                            Lead time: {material.leadTime}
-                        </span>
+            {/* Hero Section */}
+            <div className="luxury-hero">
+                <div
+                    className="luxury-hero-image"
+                    style={{ backgroundImage: `url(${material.image})` }}>
+                    <div className="luxury-overlay"></div>
+                    <div className="luxury-hero-content">
+                        <motion.h1
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8 }}
+                            className="luxury-title">
+                            {material.name}
+                        </motion.h1>
+                        <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="luxury-subtitle">
+                            {material.description}
+                        </motion.p>
+                        <div className="luxury-meta">
+                            <span className="luxury-price">
+                                {material.price}
+                            </span>
+                            <span className="luxury-category">
+                                {material.categoryTitle}
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
 
-            <div className="material-doc-content">
-                <div className="technical-specs">
-                    <h2>Technical Specifications</h2>
-                    <div className="specs-grid">
+            {/* Main Content */}
+            <div className="luxury-content-container">
+                {/* Technical Specifications */}
+                <section className="luxury-spec-section">
+                    <motion.h2
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="luxury-section-title">
+                        Technical Excellence
+                    </motion.h2>
+
+                    <div className="luxury-spec-grid">
                         {material.specs.map((spec, index) => (
-                            <div key={index} className="spec-item">
-                                <span className="spec-value">{spec}</span>
-                            </div>
+                            <motion.div
+                                key={index}
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.1,
+                                }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                className="luxury-spec-card">
+                                <div className="luxury-spec-icon">
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M5 13L9 17L19 7"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <p>{spec}</p>
+                            </motion.div>
                         ))}
                     </div>
 
                     {material.technicalSpecs && (
-                        <>
-                            <h3>Detailed Technical Data</h3>
-                            <div className="specs-grid">
+                        <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            className="luxury-tech-specs">
+                            <h3>Precision Engineering</h3>
+                            <div className="luxury-spec-table">
                                 {Object.entries(material.technicalSpecs).map(
                                     ([key, value]) => (
-                                        <div key={key} className="spec-item">
-                                            <span className="spec-key">
+                                        <div
+                                            key={key}
+                                            className="luxury-spec-row">
+                                            <span className="luxury-spec-key">
                                                 {key
                                                     .replace(/([A-Z])/g, " $1")
                                                     .replace(/^./, (str) =>
                                                         str.toUpperCase()
                                                     )}
-                                                :
                                             </span>
-                                            <span className="spec-value">
+                                            <span className="luxury-spec-value">
                                                 {value}
                                             </span>
                                         </div>
                                     )
                                 )}
                             </div>
-                        </>
+                        </motion.div>
                     )}
-                </div>
+                </section>
 
-                <div className="material-details">
-                    <div className="detail-section">
-                        <h3>Applications</h3>
-                        <ul className="applications-list">
+                {/* Applications & Details */}
+                <div className="luxury-details-grid">
+                    <motion.section
+                        className="luxury-applications"
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true, margin: "-100px" }}>
+                        <h3>Signature Applications</h3>
+                        <div className="luxury-app-grid">
                             {material.applications.map((app, index) => (
-                                <li key={index}>{app}</li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {material.installationGuide && (
-                        <div className="detail-section">
-                            <h3>Installation Guide</h3>
-                            <p>{material.installationGuide}</p>
-                        </div>
-                    )}
-
-                    {material.maintenance && (
-                        <div className="detail-section">
-                            <h3>Maintenance</h3>
-                            <p>{material.maintenance}</p>
-                        </div>
-                    )}
-
-                    <div className="detail-section">
-                        <h3>Sustainability</h3>
-                        <p>{material.sustainability}</p>
-                        {material.certifications &&
-                            material.certifications.length > 0 && (
-                                <>
-                                    <h4>Certifications</h4>
-                                    <div className="certifications">
-                                        {material.certifications.map((cert) => (
-                                            <span
-                                                key={cert}
-                                                className="cert-badge">
-                                                {cert}
-                                            </span>
-                                        ))}
+                                <div key={index} className="luxury-app-card">
+                                    <div className="luxury-app-number">
+                                        0{index + 1}
                                     </div>
-                                </>
-                            )}
+                                    <p>{app}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+
+                    {/* Installation & Maintenance */}
+                    <div className="luxury-install-maintenance">
+                        {material.installationGuide && (
+                            <motion.div
+                                className="luxury-installation"
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                viewport={{ once: true, margin: "-100px" }}>
+                                <h3>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                        />
+                                        <path
+                                            d="M12 8V12L15 15"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    Expert Installation
+                                </h3>
+                                <p>{material.installationGuide}</p>
+                            </motion.div>
+                        )}
+
+                        {material.maintenance && (
+                            <motion.div
+                                className="luxury-maintenance"
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                viewport={{ once: true, margin: "-100px" }}>
+                                <h3>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M20 12V22H4V12"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M22 7H2V12H22V7Z"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M12 22V7"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M12 7H7.5C6.83696 7 6.20107 6.73661 5.73223 6.26777C5.26339 5.79893 5 5.16304 5 4.5C5 3.83696 5.26339 3.20107 5.73223 2.73223C6.20107 2.26339 6.83696 2 7.5 2C11 2 12 7 12 7Z"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M12 7H16.5C17.163 7 17.7989 6.73661 18.2678 6.26777C18.7366 5.79893 19 5.16304 19 4.5C19 3.83696 18.7366 3.20107 18.2678 2.73223C17.7989 2.26339 17.163 2 16.5 2C13 2 12 7 12 7Z"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    Care & Maintenance
+                                </h3>
+                                <p>{material.maintenance}</p>
+                            </motion.div>
+                        )}
                     </div>
                 </div>
 
-                <div className="price-request-section">
-                    <h2>Request Pricing</h2>
-                    {requestSent ? (
-                        <div className="success-message">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M20 6L9 17l-5-5"
-                                    stroke="#8ec921"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                />
-                            </svg>
-                            <p>
-                                Your request has been sent! We'll contact you
-                                shortly.
-                            </p>
-                        </div>
-                    ) : (
-                        <form
-                            onSubmit={handleSubmit}
-                            className="price-request-form">
-                            <div className="form-group">
-                                <label htmlFor="name">Full Name*</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                />
+                {/* Certifications */}
+                {material.certifications &&
+                    material.certifications.length > 0 && (
+                        <motion.section
+                            className="luxury-certifications"
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true, margin: "-100px" }}>
+                            <h3>Accreditation & Certifications</h3>
+                            <div className="luxury-cert-grid">
+                                {material.certifications.map((cert, index) => (
+                                    <div
+                                        key={index}
+                                        className="luxury-cert-badge">
+                                        <span>{cert}</span>
+                                    </div>
+                                ))}
                             </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email">Email*</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="phone">Phone</label>
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="quantity">
-                                    Estimated Quantity
-                                </label>
-                                <input
-                                    type="text"
-                                    id="quantity"
-                                    name="quantity"
-                                    value={formData.quantity}
-                                    onChange={handleChange}
-                                    placeholder="e.g., 500 sq ft"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="projectDetails">
-                                    Project Details
-                                </label>
-                                <textarea
-                                    id="projectDetails"
-                                    name="projectDetails"
-                                    value={formData.projectDetails}
-                                    onChange={handleChange}
-                                    rows="4"
-                                    placeholder="Tell us about your project..."
-                                />
-                            </div>
-
-                            <button type="submit" className="submit-button">
-                                Request Price Quote
-                            </button>
-                        </form>
+                        </motion.section>
                     )}
-                </div>
-            </div>
 
-            <div className="related-materials">
-                <h2>More {material.categoryTitle}</h2>
-                {relatedMaterials.length > 0 ? (
-                    <div className="related-grid">
-                        {relatedMaterials.map((related) => (
-                            <div key={related.id} className="related-item">
-                                <img src={related.image} alt={related.name} />
-                                <div className="related-info">
-                                    <h3>{related.name}</h3>
-                                    <p>
-                                        {related.description.substring(0, 100)}
-                                        ...
-                                    </p>
-                                    <div className="related-meta">
-                                        <span className="price">
-                                            {related.price}
-                                        </span>
-                                        <button
-                                            onClick={() =>
-                                                navigate(
-                                                    `/materials/docs/${related.id}`
-                                                )
-                                            }
-                                            className="view-button">
-                                            View Details
-                                        </button>
+                {/* Price Request Form */}
+                <motion.section
+                    className="luxury-request-section"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}>
+                    <div className="luxury-request-container">
+                        <div className="luxury-request-content">
+                            <h2>Request Exclusive Pricing</h2>
+                            <p>
+                                Complete the form to receive a personalized
+                                quote for your project. Our material specialists
+                                will contact you within 24 hours.
+                            </p>
+
+                            {requestSent ? (
+                                <div className="luxury-success-message">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M22 4L12 14.01L9 11.01"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    <div>
+                                        <h4>Request Received</h4>
+                                        <p>
+                                            Our specialist will contact you
+                                            shortly to discuss your project
+                                            requirements.
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ) : (
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="luxury-request-form">
+                                    <div className="luxury-form-grid">
+                                        <div className="luxury-form-group">
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="Full Name*"
+                                            />
+                                        </div>
+                                        <div className="luxury-form-group">
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="Email*"
+                                            />
+                                        </div>
+                                        <div className="luxury-form-group">
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                placeholder="Phone"
+                                            />
+                                        </div>
+                                        <div className="luxury-form-group">
+                                            <input
+                                                type="text"
+                                                name="quantity"
+                                                value={formData.quantity}
+                                                onChange={handleChange}
+                                                placeholder="Estimated Quantity"
+                                            />
+                                        </div>
+                                        <div className="luxury-form-group full-width">
+                                            <textarea
+                                                name="projectDetails"
+                                                value={formData.projectDetails}
+                                                onChange={handleChange}
+                                                rows="4"
+                                                placeholder="Tell us about your project..."
+                                            />
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="luxury-submit-button">
+                                        Request Quote
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none">
+                                            <path
+                                                d="M5 12H19"
+                                                stroke="white"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                            <path
+                                                d="M12 5L19 12L12 19"
+                                                stroke="white"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </button>
+                                </form>
+                            )}
+                        </div>
+                        <div className="luxury-request-benefits">
+                            <h3>Why Choose Our Materials</h3>
+                            <ul>
+                                <li>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M22 4L12 14.01L9 11.01"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    Premium quality with unmatched durability
+                                </li>
+                                <li>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M22 4L12 14.01L9 11.01"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    Sustainable sourcing and production
+                                </li>
+                                <li>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M22 4L12 14.01L9 11.01"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    Worldwide shipping with expert logistics
+                                </li>
+                                <li>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.86"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M22 4L12 14.01L9 11.01"
+                                            stroke="#8ec921"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    Dedicated project support from our
+                                    specialists
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                ) : (
-                    <p className="no-related">
-                        No other materials currently available in this category
-                    </p>
-                )}
+                </motion.section>
+
+                {/* Related Materials */}
+                <motion.section
+                    className="luxury-related-materials"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}>
+                    <div className="luxury-related-header">
+                        <h2>Complementary Materials</h2>
+                        <p>
+                            Explore other premium options from our{" "}
+                            {material.categoryTitle} collection
+                        </p>
+                    </div>
+
+                    {relatedMaterials.length > 0 ? (
+                        <div className="luxury-related-grid">
+                            {relatedMaterials.map((related) => (
+                                <motion.div
+                                    key={related.id}
+                                    whileHover={{ y: -10 }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                    }}
+                                    className="luxury-related-card"
+                                    onClick={() =>
+                                        navigate(
+                                            `/materials/docs/${related.id}`
+                                        )
+                                    }>
+                                    <div
+                                        className="luxury-related-image"
+                                        style={{
+                                            backgroundImage: `url(${related.image})`,
+                                        }}>
+                                        <div className="luxury-related-overlay">
+                                            <span className="luxury-related-price">
+                                                {related.price}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="luxury-related-info">
+                                        <h3>{related.name}</h3>
+                                        <p>
+                                            {related.description.substring(
+                                                0,
+                                                100
+                                            )}
+                                            ...
+                                        </p>
+                                        <button className="luxury-view-button">
+                                            View Details
+                                            <svg
+                                                width="16"
+                                                height="16"
+                                                viewBox="0 0 24 24"
+                                                fill="none">
+                                                <path
+                                                    d="M5 12H19"
+                                                    stroke="#8ec921"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                                <path
+                                                    d="M12 5L19 12L12 19"
+                                                    stroke="#8ec921"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="luxury-no-related">
+                            <p>
+                                No other materials currently available in this
+                                category
+                            </p>
+                        </div>
+                    )}
+                </motion.section>
             </div>
         </div>
     );

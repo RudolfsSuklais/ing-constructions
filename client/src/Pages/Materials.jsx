@@ -396,10 +396,17 @@ const Materials = () => {
         .filter((category) => category.materials.length > 0);
 
     useEffect(() => {
-        window.scrollTo({
-            top: 650,
-            behavior: "smooth", // Optional: for smooth scrolling
-        });
+        window.scrollTo(0, 0);
+    }, []);
+
+    // Scroll on filter changes (but not initial load)
+    useEffect(() => {
+        if (activeFilter !== "all" || searchTerm !== "") {
+            window.scrollTo({
+                top: 650,
+                behavior: "smooth",
+            });
+        }
     }, [activeFilter, searchTerm]);
 
     return (

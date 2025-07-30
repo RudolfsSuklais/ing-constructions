@@ -35,6 +35,17 @@ const Home = () => {
         animateElements();
     }, []);
 
+    useEffect(() => {
+        const scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        };
+
+        scrollToTop();
+    }, []);
+
     return (
         <>
             <section id="home" className="hero-section">
