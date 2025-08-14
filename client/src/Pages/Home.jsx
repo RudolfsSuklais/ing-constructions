@@ -1,102 +1,89 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Home.css";
 import Categories from "../components/Categories";
 import PartnerCarousel from "../components/PartnerCarousel";
 import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
-import FeaturedProducts from "../components/FeaturedProducts.jsx";
 import { Link } from "react-router-dom";
+import backgroundVideo from "../assets/materials_bg.mp4"; // Replace with your video path
 
 const Home = () => {
+    const videoRef = useRef(null);
+
     useEffect(() => {
+        // Video autoplay with muted attribute
+        if (videoRef.current) {
+            videoRef.current.play().catch((error) => {
+                console.log("Autoplay prevented:", error);
+            });
+        }
+
         const animateElements = () => {
-            const heading = document.querySelector(".hero-heading");
-            const subheading = document.querySelector(".hero-subheading");
-            const ctas = document.querySelectorAll(".hero-cta");
-
-            setTimeout(() => {
-                heading.style.transform = "translateY(0)";
-                heading.style.opacity = "1";
-            }, 300);
-
-            setTimeout(() => {
-                subheading.style.transform = "translateY(0)";
-                subheading.style.opacity = "1";
-            }, 600);
-
-            ctas.forEach((cta, index) => {
+            const elements = document.querySelectorAll(
+                ".hero-heading, .hero-subheading, .hero-cta"
+            );
+            elements.forEach((el, i) => {
                 setTimeout(() => {
-                    cta.style.transform = "translateY(0)";
-                    cta.style.opacity = "1";
-                }, 900 + index * 100);
+                    el.style.transform = "translateY(0)";
+                    el.style.opacity = "1";
+                }, 300 + i * 200);
             });
         };
-
         animateElements();
-    }, []);
-
-    useEffect(() => {
-        const scrollToTop = () => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        };
-
-        scrollToTop();
     }, []);
 
     return (
         <>
-            <section id="home" className="hero-section">
+            <section className="hero-section">
                 <div className="video-background">
-                    <video autoPlay loop muted playsInline>
-                        <source
-                            src="https://videos.pexels.com/video-files/856478/856478-uhd_2732_1440_25fps.mp4"
-                            type="video/mp4"
-                        />
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="video-tag">
+                        <source src={backgroundVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
                     </video>
-                    <div className="video-overlay"></div>
                 </div>
+                <div className="luxury-overlay"></div>
 
                 <div className="hero-content">
                     <h1 className="hero-heading">
-                        Sustainable{" "}
-                        <span style={{ color: "#8ec921" }}>Construction</span>{" "}
-                        Materials
+                        Architectural{" "}
+                        <span className="gold-accent">Excellence</span>
+                        <br />
+                        in Sustainable Materials
                     </h1>
                     <p className="hero-subheading">
-                        High-quality, eco-friendly building solutions for a
-                        greener tomorrow
+                        Curated selection of premium, low-impact building
+                        solutions
+                        <br />
+                        for discerning architects and developers
                     </p>
                     <div className="hero-buttons">
                         <Link to="/materials">
                             <button className="hero-cta primary">
-                                Explore Materials
+                                View Portfolio
                                 <span className="cta-icon">→</span>
                             </button>
                         </Link>
                         <button className="hero-cta secondary">
-                            Contact Us
+                            Request Consultation
                             <span className="cta-icon">✉</span>
                         </button>
                     </div>
                 </div>
-
-                <div className="scroll-indicator">
-                    <div className="mouse">
-                        <div className="wheel"></div>
-                    </div>
-                    <div className="arrow-down"></div>
+                <div className="luxury-scroll-hint">
+                    <span>Explore</span>
+                    <div className="scroll-line"></div>
                 </div>
             </section>
 
             <Categories />
-
             <PartnerCarousel />
-
             <Projects />
-
             <Sustainability />
         </>
     );
