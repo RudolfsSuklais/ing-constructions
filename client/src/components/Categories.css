@@ -69,6 +69,7 @@
 }
 
 .categories-card {
+    cursor: pointer;
     position: relative;
     border-radius: 16px;
     overflow: hidden;
@@ -103,8 +104,8 @@
     height: 100%;
     background: linear-gradient(
         to top,
-        rgba(15, 21, 24, 0.9) 0%,
-        rgba(15, 21, 24, 0.4) 50%,
+        rgba(15, 21, 24, 0.6) 0%,
+        rgba(15, 21, 24, 0.2) 50%,
         transparent 100%
     );
     display: flex;
@@ -113,6 +114,16 @@
     padding: 30px;
     color: white;
     border-radius: inherit;
+    transition: background 0.4s ease; /* smooth transition */
+}
+
+.categories-card:hover .categories-card-overlay {
+    background: linear-gradient(
+        to top,
+        rgba(15, 21, 24, 0.9) 100%,
+        rgba(15, 21, 24, 0.5) 50%,
+        rgba(15, 21, 24, 0.2) 100%
+    );
 }
 
 .categories-card-content h3 {
@@ -180,11 +191,20 @@
     background-color: var(--gold-accent);
 }
 
+.categories-view-all-container {
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    z-index: 2;
+}
+
 .categories-material-cta {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: var(--gold-accent);
+    background: var(--gold-accent);
     color: var(--slate-dark);
     border: none;
     padding: 14px 28px;
@@ -197,33 +217,34 @@
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-}
-
-.categories-view-all-container {
-    text-align: center;
-    margin-top: 80px;
-    position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .categories-view-all-materials {
-    display: inline-flex;
+    position: relative;
+    overflow: hidden;
+    display: flex;
     align-items: center;
-    background-color: transparent;
-    color: var(--gold-accent);
-    border: 1px solid var(--gold-accent);
-    padding: 16px 36px;
+    gap: 8px;
+    background: var(--gold-accent);
+    color: var(--slate-dark);
+    border: none;
+    padding: 14px 28px;
     border-radius: 50px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 30%;
+    justify-content: space-between;
     font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
+    z-index: 1;
+    margin: 0 auto;
 }
 
+/* glowing swipe background */
+.categories-material-cta::before,
 .categories-view-all-materials::before {
     content: "";
     position: absolute;
@@ -232,21 +253,42 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        90deg,
+        120deg,
         transparent,
-        rgba(196, 168, 111, 0.2),
+        var(--gold-dark),
         transparent
     );
-    transition: 0.5s;
-    border-radius: 50px;
+    transition: all 0.5s ease;
+    z-index: 0;
 }
 
-.categories-view-all-materials:hover::before {
+.categories-material-cta:hover::before,
+.categories-view-all-materials::before {
     left: 100%;
 }
 
+/* subtle lift */
+.categories-material-cta:hover,
 .categories-view-all-materials:hover {
-    background-color: rgba(196, 168, 111, 0.1);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(4, 178, 169, 0.3);
+}
+
+/* arrow icon animation */
+.categories-material-cta svg {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.categories-material-cta:hover svg {
+    transform: translateX(6px);
+}
+
+/* keep text above glow */
+.categories-material-cta span {
+    position: relative;
+    z-index: 2;
 }
 
 .accent-gold {

@@ -15,7 +15,7 @@
     height: 200%;
     background: radial-gradient(
         circle,
-        rgba(196, 168, 111, 0.05) 1%,
+        rgba(4, 196, 221, 0.05) 1%,
         transparent 40%
     );
     animation: rotateBG 40s linear infinite;
@@ -67,10 +67,14 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(196, 168, 111, 0.2);
+    border: 1px solid #0bf3c5;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(4, 184, 172, 0.2);
     z-index: 1;
+}
+
+.accent-2 {
+    font-weight: 300;
 }
 
 .sust-metric-glow {
@@ -82,7 +86,7 @@
     height: 200%;
     background: radial-gradient(
         circle,
-        rgba(196, 168, 111, 0.15) 0%,
+        rgba(4, 163, 171, 0.15) 0%,
         transparent 70%
     );
     filter: blur(40px);
@@ -128,7 +132,7 @@
 }
 .sust-metric-description {
     font-size: 1rem;
-    color: rgba(232, 216, 184, 0.7);
+    color: #0bf3c5;
     position: relative;
     z-index: 2;
 }
@@ -148,7 +152,7 @@
 
 .sust-certifications h4 {
     text-align: center;
-    color: var(--gold-accent);
+    color: white;
     font-weight: 400;
     margin-bottom: 30px;
     font-size: 1.2rem;

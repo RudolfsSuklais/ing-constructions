@@ -47,7 +47,9 @@ const NavBar = () => {
                     <NavLink to="/contact" className="nav-link">
                         Contact
                     </NavLink>
-                    <button className="nav-cta">Get Quote</button>
+                    <NavLink to={"/contact"}>
+                        <button className="nav-cta">Get Quote</button>
+                    </NavLink>
                 </div>
 
                 <div className="mobile-menu-btn" onClick={toggleMobileMenu}>

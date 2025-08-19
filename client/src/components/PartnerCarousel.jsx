@@ -79,7 +79,7 @@ const PartnerCarousel = () => {
             </div>
             <div className="view-all-container">
                 <motion.button
-                    className="view-all-button"
+                    className="projects-view-all-button"
                     transition={{ duration: 0.3 }}>
                     View All Partners
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">

@@ -119,12 +119,7 @@ const Projects = () => {
                                             className="projects-view-details-button"
                                             initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
-                                            whileHover={{
-                                                backgroundColor: "#1d8236",
-                                                boxShadow:
-                                                    "0 10px 25px rgba(29, 130, 54, 0.3)",
-                                            }}
-                                            transition={{ duration: 0.3 }}>
+                                            transition={{ duration: 0.2 }}>
                                             View Details
                                             <svg
                                                 width="16"

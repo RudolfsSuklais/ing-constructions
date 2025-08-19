@@ -4,10 +4,10 @@ import "./Categories.css";
 import { Link } from "react-router-dom";
 
 // Import high-quality images
-import AluminiumImage from "../assets/aluminium-facade.jpg";
-import PlywoodImage from "../assets/plywood.jpg";
-import GlassImage from "../assets/glass-panels.jpg";
-import ConcreteImage from "../assets/concrete-finishes.jpg";
+import AluminiumImage from "../assets/materials/aluminium-facade.jpg";
+import PlywoodImage from "../assets/materials/marble.jpg";
+import GlassImage from "../assets/materials/steel.jpg";
+import ConcreteImage from "../assets/materials/ceramic-tiles.jpeg";
 
 const Categories = () => {
     const ref = useRef(null);
@@ -16,31 +16,33 @@ const Categories = () => {
     const materials = [
         {
             id: 1,
-            title: "Aluminium Facades",
+            title: "Aluminium Products",
             description:
-                "Premium powder-coated systems with hidden fixings for seamless aesthetics.",
+                "Doors, windows, facades and more in premium aluminium systems.",
             image: AluminiumImage,
             stat: "30-year warranty",
         },
         {
             id: 2,
-            title: "Architectural Plywood",
+            title: "Marble & Natural Stone",
             description:
-                "AA-grade Baltic birch with formaldehyde-free adhesives.",
+                "High-quality marble, granite, and other natural stones for floors, walls, and facades.",
             image: PlywoodImage,
             stat: "15mm-30mm thickness",
         },
         {
             id: 3,
-            title: "Structural Glass",
-            description: "Laminated safety glass with low-iron clarity.",
+            title: "Steel & Metal Structures",
+            description:
+                "Structural steel, beams, and metal elements for modern architecture.",
             image: GlassImage,
             stat: "Up to 25mm thick",
         },
         {
             id: 4,
-            title: "Polished Concrete",
-            description: "Diamond-ground finishes with integral color options.",
+            title: "Ceramic & Tiles",
+            description:
+                "Premium ceramic tiles and porcelain solutions for floors, walls, and decorative surfaces.  ",
             image: ConcreteImage,
             stat: "80+ MPa strength",
         },
@@ -115,7 +117,7 @@ const Categories = () => {
                                             className="categories-material-cta"
                                             initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.3 }}>
+                                            transition={{ duration: 0.1 }}>
                                             View Specifications
                                             <svg
                                                 width="18"
@@ -143,13 +145,15 @@ const Categories = () => {
                 transition={{ delay: 0.8 }}
                 className="categories-view-all-container">
                 <Link to="/materials">
-                    <button className="categories-view-all-materials">
-                        Explore Full Material Library
+                    <motion.button
+                        className="projects-view-all-button"
+                        transition={{ duration: 0.3 }}>
+                        View All Materials
                         <svg
                             width="18"
                             height="18"
                             viewBox="0 0 24 24"
-                            style={{ marginLeft: "8px" }}>
+                            fill="none">
                             <path
                                 d="M5 12H19M19 12L12 5M19 12L12 19"
                                 stroke="currentColor"
@@ -157,7 +161,7 @@ const Categories = () => {
                                 strokeLinecap="round"
                             />
                         </svg>
-                    </button>
+                    </motion.button>
                 </Link>
             </motion.div>
         </section>

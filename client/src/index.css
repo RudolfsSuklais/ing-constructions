@@ -1,0 +1,24 @@
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* slim but visible */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--slate-dark); /* matches dark background */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold-accent), var(--gold-dark));
+    border-radius: 10px;
+    border: 2px solid var(--slate-dark); /* makes thumb floating effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gold-dark), var(--gold-accent));
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-accent) var(--slate-dark);
+}

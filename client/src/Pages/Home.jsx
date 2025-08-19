@@ -6,6 +6,7 @@ import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
 import { Link } from "react-router-dom";
 import backgroundVideo from "../assets/materials_bg-2.mp4"; // Replace with your video path
+import CTASection from "../components/CTASection";
 
 const Home = () => {
     const videoRef = useRef(null);
@@ -85,6 +86,7 @@ const Home = () => {
             <PartnerCarousel />
             <Projects />
             <Sustainability />
+            <CTASection />
         </>
     );
 };

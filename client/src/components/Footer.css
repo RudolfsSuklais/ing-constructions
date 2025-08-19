@@ -16,7 +16,7 @@
     grid-template-columns: 1fr 2fr;
     gap: 60px;
     padding-bottom: 60px;
-    border-bottom: 1px solid rgba(196, 168, 111, 0.2);
+    border-bottom: 1px solid rgba(9, 183, 171, 0.2);
 }
 
 .footer-brand {
@@ -98,7 +98,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 30px;
-    border-top: 1px solid rgba(196, 168, 111, 0.2);
+    border-top: 1px solid rgba(10, 187, 166, 0.2);
     margin-top: 40px;
 }
 

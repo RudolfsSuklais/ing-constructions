@@ -108,7 +108,7 @@
     z-index: 2;
 }
 
-.projects-card-overlay {
+.projects-card:hover .projects-card-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -116,7 +116,7 @@
     height: 100%;
     background: linear-gradient(
         to top,
-        rgba(15, 21, 24, 0.9) 0%,
+        rgba(15, 21, 24, 0.7) 100%,
         rgba(15, 21, 24, 0.4) 50%,
         transparent 100%
     );
@@ -126,6 +126,7 @@
     padding: 30px;
     color: white;
     border-radius: inherit;
+    transition: 0.3s;
 }
 
 .projects-card-content {
@@ -180,7 +181,7 @@
 .projects-materials-used {
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(232, 216, 184, 0.9);
+    color: rgba(10, 232, 199, 0.99);
     margin-bottom: 20px;
 }
 
@@ -201,6 +202,11 @@
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+
+.projects-view-details-button:hover {
+    background-color: #1f9e85;
+    letter-spacing: 1.5px;
 }
 
 .projects-view-all-container {
@@ -238,7 +244,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(196, 168, 111, 0.2),
+        rgba(10, 148, 156, 0.2),
         transparent
     );
     transition: 0.5s;
@@ -250,7 +256,7 @@
 }
 
 .projects-view-all-button:hover {
-    background-color: rgba(28, 128, 128, 0.1);
+    background-color: rgba(14, 147, 147, 0.1);
 }
 
 .projects-accent-gold {

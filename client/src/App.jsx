@@ -5,15 +5,21 @@ import Footer from "./components/Footer.jsx";
 import Materials from "./Pages/Materials.jsx";
 import About from "./Pages/About.jsx";
 import MaterialDocPage from "./Pages/MaterialDocPage.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
+import Contact from "./Pages/Contact.jsx";
+import BackToTop from "./components/BackToTop.jsx";
 
 function App() {
     return (
         <Router>
+            <ScrollToTop />
+            <BackToTop />
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route
                     path="/materials/docs/:materialId"
                     element={<MaterialDocPage />}
