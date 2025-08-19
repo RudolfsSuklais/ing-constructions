@@ -74,7 +74,8 @@ const Categories = () => {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.8 }}
                     className="section-title">
-                    <span className="accent-2">Engineered</span> Materials
+                    <span className="accent-2">Engineered</span>{" "}
+                    <span className="accent-1"> Materials</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0 }}
@@ -97,39 +98,44 @@ const Categories = () => {
                         variants={cardVariants}
                         whileHover={{ y: -10 }}>
                         <div className="card-image-container">
-                            <motion.img
+                            <img
                                 src={material.image}
                                 alt={material.title}
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.4 }}
+                                className="card-image"
                             />
-                            <div className="image-overlay"></div>
-                        </div>
-                        <div className="card-content">
-                            <div className="content-wrapper">
-                                <h3>{material.title}</h3>
-                                <p>{material.description}</p>
-                                <div className="material-stat">
-                                    {material.stat}
+                            <div className="card-overlay">
+                                <div className="card-content">
+                                    <h3>{material.title}</h3>
+                                    <div className="hover-content">
+                                        <p>{material.description}</p>
+                                        <div className="material-stat">
+                                            {material.stat}
+                                        </div>
+                                        <motion.button
+                                            className="material-cta"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            whileHover={{
+                                                backgroundColor:
+                                                    "var(--gold-dark)",
+                                            }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.3 }}>
+                                            View Specifications
+                                            <svg
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M5 12H19M19 12L12 5M19 12L12 19"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                />
+                                            </svg>
+                                        </motion.button>
+                                    </div>
                                 </div>
                             </div>
-                            <motion.button
-                                className="material-cta"
-                                whileHover={{
-                                    backgroundColor: "var(--gold-dark)",
-                                    x: 5,
-                                }}
-                                transition={{ duration: 0.3 }}>
-                                View Specifications
-                                <svg width="18" height="18" viewBox="0 0 24 24">
-                                    <path
-                                        d="M5 12H19M19 12L12 5M19 12L12 19"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                    />
-                                </svg>
-                            </motion.button>
                         </div>
                     </motion.div>
                 ))}

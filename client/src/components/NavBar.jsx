@@ -9,9 +9,8 @@ const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 10);
+            setScrolled(window.scrollY > 80); // scroll threshold
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -33,40 +32,19 @@ const NavBar = () => {
                     className={`navbar-links ${
                         mobileMenuOpen ? "active" : ""
                     }`}>
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                            `nav-link ${isActive ? "active" : ""}`
-                        }
-                        end>
+                    <NavLink to="/" className="nav-link" end>
                         Home
                     </NavLink>
-                    <NavLink
-                        to="/materials"
-                        className={({ isActive }) =>
-                            `nav-link ${isActive ? "active" : ""}`
-                        }>
+                    <NavLink to="/materials" className="nav-link">
                         Materials
                     </NavLink>
-                    <NavLink
-                        to="/about"
-                        className={({ isActive }) =>
-                            `nav-link ${isActive ? "active" : ""}`
-                        }>
+                    <NavLink to="/about" className="nav-link">
                         About
                     </NavLink>
-                    <NavLink
-                        to="/projects"
-                        className={({ isActive }) =>
-                            `nav-link ${isActive ? "active" : ""}`
-                        }>
+                    <NavLink to="/projects" className="nav-link">
                         Projects
                     </NavLink>
-                    <NavLink
-                        to="/contact"
-                        className={({ isActive }) =>
-                            `nav-link ${isActive ? "active" : ""}`
-                        }>
+                    <NavLink to="/contact" className="nav-link">
                         Contact
                     </NavLink>
                     <button className="nav-cta">Get Quote</button>

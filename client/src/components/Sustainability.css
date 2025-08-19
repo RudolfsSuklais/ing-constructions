@@ -1,114 +1,193 @@
-.sustainability-section {
-    padding: 100px 40px;
-    background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+:root {
+    --slate: #1a2226;
+    --slate-dark: #0f1518;
+    --champagne: #e8d8b8;
+    --champagne-light: #f4ede2;
+    --gold-accent: #c4a86f;
+    --gold-dark: #a68a56;
 }
 
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    max-width: 1000px;
-    margin: 60px auto;
-}
-
-.metric-card {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 2px;
-    text-align: center;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.03);
+.sust-section {
+    padding: 140px 40px;
+    background-color: var(--slate-dark);
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
-.metric-card::after {
+.sust-section::before {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, #8ec921, #1d8236);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(196, 168, 111, 0.05) 1%,
+        transparent 40%
+    );
+    animation: rotateBG 40s linear infinite;
+    z-index: 0;
 }
 
-.metric-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+@keyframes rotateBG {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-.metric-value {
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: #1d8236;
-    line-height: 1;
-    margin-bottom: 10px;
-}
-
-.metric-title {
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin-bottom: 12px;
-    color: #1a1a1a;
-}
-
-.metric-description {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.6;
-}
-
-.certifications {
-    max-width: 800px;
-    margin: 80px auto 0;
+/* Header */
+.sust-header {
     text-align: center;
+    margin-bottom: 60px;
+    z-index: 2;
+    position: relative;
 }
-
-.certifications h4 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #666;
-    margin-bottom: 30px;
-    font-weight: 400;
+.sust-title {
+    font-size: 3rem;
+    color: var(--champagne-light);
 }
-
-.certification-logos {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-.certification-logos span {
+.sust-subtitle {
     font-size: 1.2rem;
-    font-weight: 500;
-    color: #4b9830;
-    padding: 0 15px;
+    color: var(--gold-accent);
+    margin-top: 10px;
+}
+
+/* Metrics grid */
+.sust-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 2;
     position: relative;
 }
 
-.certification-logos span:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 20px;
-    background: #ddd;
+/* Individual card */
+.sust-metric-card {
+    background: #11181b;
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(196, 168, 111, 0.2);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
-@media (max-width: 768px) {
-    .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+.sust-metric-glow {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(196, 168, 111, 0.15) 0%,
+        transparent 70%
+    );
+    filter: blur(40px);
+    animation: floatGlow 6s ease-in-out infinite alternate;
+    z-index: 0;
+}
 
-    .certification-logos {
-        gap: 20px;
+@keyframes floatGlow {
+    0% {
+        transform: translate(0px, 0px) scale(1);
     }
+    50% {
+        transform: translate(10px, -10px) scale(1.05);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
 
-    .certification-logos span:not(:last-child)::after {
-        display: none;
+/* Card content */
+.sust-metric-icon {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: var(--gold-accent);
+    position: relative;
+    z-index: 2;
+}
+.sust-metric-value {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold-accent);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+.sust-metric-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--champagne-light);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+.sust-metric-description {
+    font-size: 1rem;
+    color: rgba(232, 216, 184, 0.7);
+    position: relative;
+    z-index: 2;
+}
+
+.accent-1 {
+    font-weight: 300;
+}
+
+/* Add this to your CSS */
+.sust-certifications {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.sust-certifications h4 {
+    text-align: center;
+    color: var(--gold-accent);
+    font-weight: 400;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.sust-cert-logos-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.sust-cert-logos {
+    display: inline-flex;
+    gap: 60px;
+    padding: 20px 0;
+}
+
+.sust-cert-logos span {
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gold-accent);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
     }
 }
