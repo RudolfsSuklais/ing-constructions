@@ -1,12 +1,3 @@
-:root {
-    --slate: #1a2226;
-    --slate-dark: #0f1518;
-    --champagne: #e8d8b8;
-    --champagne-light: #f4ede2;
-    --gold-accent: #c4a86f;
-    --gold-dark: #a68a56;
-}
-
 .sust-section {
     padding: 140px 40px;
     background-color: var(--slate-dark);
