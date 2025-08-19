@@ -1,14 +1,8 @@
 /* styles/Home.css */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
-:root {
-    /* Premium Color Palette */
-    --slate: #1a2226;
-    --slate-dark: #0f1518;
-    --champagne: #e8d8b8;
-    --champagne-light: #f4ede2;
-    --gold-accent: #c4a86f;
-    --gold-dark: #a68a56;
+.accent-2 {
+    color: white;
 }
 
 /* Base Reset */
@@ -190,7 +184,7 @@
 .hero-cta.primary:hover {
     background: var(--gold-dark);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(196, 168, 111, 0.4);
+    box-shadow: 0 8px 25px rgba(5, 154, 136, 0.4);
 }
 
 .hero-cta.primary:hover::before {
@@ -206,7 +200,7 @@
 }
 
 .hero-cta.secondary:hover {
-    background: rgba(232, 216, 184, 0.1);
+    background: rgba(6, 126, 120, 0.1);
     border-color: var(--gold-accent);
     color: var(--gold-accent);
     transform: translateY(-3px);

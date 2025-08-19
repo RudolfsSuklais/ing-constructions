@@ -6,7 +6,7 @@
     width: 100%;
     padding: 20px 0;
     z-index: 1000;
-    background: linear-gradient(90deg, #34312c, #181613, #211e17);
+    background: var(--slate-dark);
     transition: all 0.4s ease;
 }
 
@@ -17,7 +17,7 @@
     transform: translateX(-50%);
     width: 90%;
     border-radius: 20px;
-    background: rgba(30, 30, 30, 0.55);
+    background: rgba(15, 21, 24, 0.55); /* same as materials overlay */
     backdrop-filter: blur(15px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     padding: 15px 0;
@@ -49,7 +49,7 @@
 }
 
 .nav-link {
-    color: #fffbea;
+    color: var(--champagne);
     text-decoration: none;
     margin: 0 18px;
     font-weight: 500;
@@ -59,7 +59,7 @@
 }
 
 .nav-link:hover {
-    color: #d4af37; /* gold highlight */
+    color: var(--gold-accent);
 }
 
 .nav-link::after {
@@ -69,15 +69,16 @@
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: #d4af37;
+    background-color: var(--gold-accent);
     transition: width 0.3s ease;
 }
+
 .nav-link:hover::after {
     width: 100%;
 }
 
 .nav-link.active {
-    color: #d4af37;
+    color: var(--gold-accent);
 }
 .nav-link.active::after {
     width: 100%;
@@ -85,8 +86,8 @@
 
 /* CTA button */
 .nav-cta {
-    background: linear-gradient(135deg, #d4af37, #b9975b);
-    color: white;
+    background: var(--gold-accent);
+    color: var(--slate-dark);
     border: none;
     padding: 10px 22px;
     border-radius: 30px;
@@ -94,12 +95,12 @@
     margin-left: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
 }
 .nav-cta:hover {
-    background: linear-gradient(135deg, #b9975b, #8c6f2c);
+    background: var(--gold-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 6px 18px rgba(22, 160, 133, 0.4);
 }
 
 /* Mobile menu */
@@ -115,7 +116,7 @@
 .menu-line {
     width: 100%;
     height: 3px;
-    background-color: white;
+    background-color: var(--champagne);
     transition: all 0.3s ease;
     border-radius: 3px;
 }
@@ -141,7 +142,7 @@
         right: -100%;
         width: 70%;
         height: 100vh;
-        background: rgba(25, 25, 25, 0.98);
+        background: rgba(15, 21, 24, 0.95);
         flex-direction: column;
         justify-content: center;
         align-items: center;

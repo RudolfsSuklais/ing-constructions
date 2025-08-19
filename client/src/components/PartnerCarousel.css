@@ -125,29 +125,10 @@
     }
 }
 
-.view-all {
+.partner-section .view-all {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-}
-
-.view-all-button {
-    background: var(--gold-accent);
-    color: var(--slate-dark);
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 500;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.view-all-button:hover {
-    background: var(--gold-dark);
+    margin-top: 30px !important;
 }
 
 @media (max-width: 768px) {

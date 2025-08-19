@@ -5,7 +5,7 @@ import PartnerCarousel from "../components/PartnerCarousel";
 import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
 import { Link } from "react-router-dom";
-import backgroundVideo from "../assets/materials_bg.mp4"; // Replace with your video path
+import backgroundVideo from "../assets/materials_bg-2.mp4"; // Replace with your video path
 
 const Home = () => {
     const videoRef = useRef(null);

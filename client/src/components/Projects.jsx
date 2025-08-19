@@ -65,21 +65,21 @@ const Projects = () => {
     };
 
     return (
-        <section id="projects" className="projects-section" ref={ref}>
-            <div className="section-header">
+        <section ref={ref} className="projects-section">
+            <div className="projects-header">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="section-title">
-                    <span className="accent-1"> Our</span>{" "}
-                    <span className="accent-2">Portfolio</span>
+                    className="projects-title">
+                    <span className="projects-accent-light"> Our</span>{" "}
+                    <span className="projects-accent-gold">Portfolio</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.4, duration: 0.8 }}
-                    className="section-subtitle">
+                    className="projects-subtitle">
                     Showcasing premium construction solutions
                 </motion.p>
             </div>
@@ -92,29 +92,31 @@ const Projects = () => {
                 {projects.map((project, i) => (
                     <motion.div
                         key={project.id}
-                        className="project-card"
+                        className="projects-card"
                         custom={i}
                         variants={cardVariants}
                         whileHover={{ y: -10 }}>
-                        <div className="card-image-container">
+                        <div className="projects-card-image-container">
                             <img
                                 src={project.image}
                                 alt={project.title}
-                                className="project-image"
+                                className="projects-card-image"
                             />
-                            <div className="year-badge">{project.year}</div>
-                            <div className="card-overlay">
-                                <div className="card-content">
+                            <div className="projects-year-badge">
+                                {project.year}
+                            </div>
+                            <div className="projects-card-overlay">
+                                <div className="projects-card-content">
                                     <h3>{project.title}</h3>
-                                    <div className="hover-content">
-                                        <p className="location">
+                                    <div className="projects-hover-content">
+                                        <p className="projects-location">
                                             {project.location}
                                         </p>
-                                        <p className="materials-used">
+                                        <p className="projects-materials-used">
                                             {project.materials}
                                         </p>
                                         <motion.button
-                                            className="view-details-button"
+                                            className="projects-view-details-button"
                                             initial={{ opacity: 0, y: 10 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             whileHover={{
@@ -149,9 +151,9 @@ const Projects = () => {
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.8 }}
-                className="view-all-container">
+                className="projects-view-all-container">
                 <motion.button
-                    className="view-all-button"
+                    className="projects-view-all-button"
                     transition={{ duration: 0.3 }}>
                     View All Projects
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">

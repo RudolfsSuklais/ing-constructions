@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import "./Categories.css";
 import { Link } from "react-router-dom";
 
-// Import high-quality images (replace with your actual image paths)
+// Import high-quality images
 import AluminiumImage from "../assets/aluminium-facade.jpg";
 import PlywoodImage from "../assets/plywood.jpg";
 import GlassImage from "../assets/glass-panels.jpg";
@@ -67,57 +67,53 @@ const Categories = () => {
     };
 
     return (
-        <section id="materials" className="premium-materials" ref={ref}>
-            <div className="section-header">
+        <section ref={ref} className="categories-section">
+            <div className="categories-header">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="section-title">
-                    <span className="accent-2">Engineered</span>{" "}
-                    <span className="accent-1"> Materials</span>
+                    className="categories-title">
+                    <span className="accent-gold">Engineered</span>{" "}
+                    <span className="accent-light"> Materials</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.4, duration: 0.8 }}
-                    className="section-subtitle">
+                    className="categories-subtitle">
                     Precision-crafted for architectural excellence
                 </motion.p>
             </div>
 
             <motion.div
-                className="materials-grid"
+                className="categories-grid"
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}>
                 {materials.map((material) => (
                     <motion.div
                         key={material.id}
-                        className="material-card"
+                        className="categories-card"
                         variants={cardVariants}
                         whileHover={{ y: -10 }}>
-                        <div className="card-image-container">
+                        <div className="categories-card-image-container">
                             <img
                                 src={material.image}
                                 alt={material.title}
-                                className="card-image"
+                                className="categories-card-image"
                             />
-                            <div className="card-overlay">
-                                <div className="card-content">
+                            <div className="categories-card-overlay">
+                                <div className="categories-card-content">
                                     <h3>{material.title}</h3>
-                                    <div className="hover-content">
+                                    <div className="categories-hover-content">
                                         <p>{material.description}</p>
-                                        <div className="material-stat">
+                                        <div className="categories-material-stat">
                                             {material.stat}
                                         </div>
                                         <motion.button
-                                            className="material-cta"
+                                            className="categories-material-cta"
                                             initial={{ opacity: 0, y: 10 }}
-                                            whileHover={{
-                                                backgroundColor:
-                                                    "var(--gold-dark)",
-                                            }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.3 }}>
                                             View Specifications
@@ -145,9 +141,9 @@ const Categories = () => {
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.8 }}
-                className="view-all-container">
+                className="categories-view-all-container">
                 <Link to="/materials">
-                    <button className="view-all-materials">
+                    <button className="categories-view-all-materials">
                         Explore Full Material Library
                         <svg
                             width="18"

@@ -86,6 +86,23 @@ const Materials = () => {
         },
     ];
 
+    // Card animation variants
+    const cardVariants = {
+        offscreen: {
+            y: 50,
+            opacity: 0,
+        },
+        onscreen: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                bounce: 0.4,
+                duration: 0.8,
+            },
+        },
+    };
+
     return (
         <div className="materials-page">
             {/* Hero Section */}
@@ -115,28 +132,64 @@ const Materials = () => {
                 <div className="materials-grid families-grid">
                     {productFamilies.map((family, index) => (
                         <motion.div
-                            key={family.id}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{
-                                delay: index * 0.1,
-                                duration: 0.6,
-                            }}
-                            viewport={{ once: true }}
-                            className="family-card">
+                            className="premium-card"
+                            initial="offscreen"
+                            whileInView="onscreen"
+                            viewport={{ once: true, amount: 0.3 }}
+                            variants={cardVariants}
+                            key={family.id}>
                             <Link to={`/materials/${family.id}`}>
-                                <div className="family-image-container">
-                                    <img
-                                        src={family.image}
-                                        alt={family.name}
-                                        className="family-image"
-                                    />
-                                    <div className="family-overlay">
-                                        <h3>{family.name}</h3>
-                                        <p>{family.description}</p>
-                                        <span className="view-more">
-                                            View Products →
-                                        </span>
+                                <div className="card-inner">
+                                    <div className="card-image-container">
+                                        <img
+                                            src={family.image}
+                                            alt={family.name}
+                                            className="card-image"
+                                        />
+                                        <div className="card-overlay"></div>
+                                        <div className="card-shine"></div>
+                                    </div>
+                                    <div className="card-content">
+                                        <div className="card-border-top"></div>
+                                        <h3 className="card-title">
+                                            {family.name}
+                                        </h3>
+                                        <p className="card-description">
+                                            {family.description}
+                                        </p>
+                                        <div className="card-action">
+                                            <span className="view-products-btn">
+                                                View Collection
+                                                <svg
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M13.5 6H5.25C4.00736 6 3 7.00736 3 8.25V18.75C3 19.9926 4.00736 21 5.25 21H15.75C16.9926 21 18 19.9926 18 18.75V10.5"
+                                                        stroke="currentColor"
+                                                        strokeWidth="1.5"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    />
+                                                    <path
+                                                        d="M16.5 3.75H21V8.25"
+                                                        stroke="currentColor"
+                                                        strokeWidth="1.5"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    />
+                                                    <path
+                                                        d="M10.5 13.5L21 3"
+                                                        stroke="currentColor"
+                                                        strokeWidth="1.5"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    />
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </Link>
@@ -153,9 +206,8 @@ const Materials = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}>
-                        <span className="accent-1">Tailored</span>{" "}
-                        <span className="accent">Material</span>{" "}
-                        <span className="accent-1">Solutions</span>
+                        <span className="accent-1">Tailored</span> Material
+                        <span className="accent-1"> Solutions</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
