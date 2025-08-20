@@ -8,10 +8,8 @@ import "./Partners.css";
 // Example partner logos (replace with actual partner logos)
 import Partner1 from "../assets/logos/Finestra_logo.png";
 import Partner2 from "../assets/logos/nefertity_logo.png";
-import Partner3 from "../assets/logos/Weitzer_parkett_logo.png";
-import Partner4 from "../assets/logos/Finestra_logo.png";
-import Partner5 from "../assets/logos/Finestra_logo.png";
-import Partner6 from "../assets/logos/Finestra_logo.png";
+import Partner3 from "../assets/logos/weitzer_parkett_logo.png";
+import Partner4 from "../assets/logos/rabel_systems_logo.png";
 
 const Partners = () => {
     const [partners, setPartners] = useState([]);

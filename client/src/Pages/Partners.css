@@ -209,7 +209,7 @@
 
 .partner-card {
     perspective: 1500px;
-    height: 380px;
+    height: 750px;
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
