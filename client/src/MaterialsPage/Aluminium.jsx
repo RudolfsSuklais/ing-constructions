@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import "./aluminium.css";
+import "./Aluminium.css";
 
 // Example product images (replace with real product images later)
 import SlidingDoorImg from "../assets/materials/aluminium-facade.jpg";
