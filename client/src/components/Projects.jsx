@@ -9,7 +9,7 @@ import Project3 from "../assets/HS2.jpg";
 
 const Projects = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
+    const isInView = useInView(ref, { once: true, amount: 0.1 }); // Reduced amount for mobile
 
     const projects = [
         {
@@ -41,13 +41,13 @@ const Projects = () => {
     ];
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 60 },
+        hidden: { opacity: 0, y: 40 },
         visible: (i) => ({
             opacity: 1,
             y: 0,
             transition: {
-                delay: i * 0.15,
-                duration: 0.6,
+                delay: i * 0.1, // Reduced delay for mobile
+                duration: 0.5, // Slightly faster animation
                 ease: [0.16, 0.77, 0.47, 0.97],
             },
         }),
@@ -58,8 +58,8 @@ const Projects = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3,
+                staggerChildren: 0.08, // Faster stagger for mobile
+                delayChildren: 0.2, // Reduced delay for mobile
             },
         },
     };
@@ -70,7 +70,7 @@ const Projects = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.2, duration: 0.8 }}
+                    transition={{ delay: 0.1, duration: 0.6 }} // Faster animation
                     className="projects-title">
                     <span className="projects-accent-light"> Our</span>{" "}
                     <span className="projects-accent-gold">Portfolio</span>
@@ -78,7 +78,7 @@ const Projects = () => {
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.4, duration: 0.8 }}
+                    transition={{ delay: 0.2, duration: 0.6 }} // Faster animation
                     className="projects-subtitle">
                     Showcasing premium construction solutions
                 </motion.p>
@@ -95,7 +95,9 @@ const Projects = () => {
                         className="projects-card"
                         custom={i}
                         variants={cardVariants}
-                        whileHover={{ y: -10 }}>
+                        whileHover={{ y: -8 }} // Reduced hover effect for mobile
+                        whileTap={{ y: 0 }} // Remove hover effect on tap
+                    >
                         <div className="projects-card-image-container">
                             <img
                                 src={project.image}
@@ -145,11 +147,12 @@ const Projects = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.5 }} // Reduced delay
                 className="projects-view-all-container">
                 <motion.button
                     className="projects-view-all-button"
-                    transition={{ duration: 0.3 }}>
+                    whileTap={{ scale: 0.95 }} // Add tap feedback
+                    transition={{ duration: 0.2 }}>
                     View All Projects
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                         <path

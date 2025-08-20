@@ -42,7 +42,7 @@ const Categories = () => {
             id: 4,
             title: "Ceramic & Tiles",
             description:
-                "Premium ceramic tiles and porcelain solutions for floors, walls, and decorative surfaces.  ",
+                "Premium ceramic tiles and porcelain solutions for floors, walls, and decorative surfaces.",
             image: ConcreteImage,
             stat: "80+ MPa strength",
         },
@@ -146,7 +146,7 @@ const Categories = () => {
                 className="categories-view-all-container">
                 <Link to="/materials">
                     <motion.button
-                        className="projects-view-all-button"
+                        className="categories-view-all-materials"
                         transition={{ duration: 0.3 }}>
                         View All Materials
                         <svg

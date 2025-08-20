@@ -8,6 +8,8 @@ import MaterialDocPage from "./Pages/MaterialDocPage.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Contact from "./Pages/Contact.jsx";
 import BackToTop from "./components/BackToTop.jsx";
+import Aluminium from "./MaterialsPage/Aluminium.jsx";
+import Partners from "./Pages/Partners.jsx";
 
 function App() {
     return (
@@ -17,9 +19,11 @@ function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/materials/aluminium" element={<Aluminium />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/partners" element={<Partners />} />
                 <Route
                     path="/materials/docs/:materialId"
                     element={<MaterialDocPage />}

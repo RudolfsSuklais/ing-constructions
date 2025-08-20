@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Home.css";
 import Categories from "../components/Categories";
 import PartnerCarousel from "../components/PartnerCarousel";
@@ -6,18 +6,26 @@ import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
 import { Link } from "react-router-dom";
 import backgroundVideo from "../assets/materials_bg-2.mp4"; // Replace with your video path
+import backgroundPoster from "../assets/aluminium-facade.jpg"; // Add a poster image for mobile
 import CTASection from "../components/CTASection";
 
 const Home = () => {
     const videoRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
     useEffect(() => {
-        // Video autoplay with muted attribute
+        // Handle video autoplay with muted attribute
         if (videoRef.current) {
             videoRef.current.play().catch((error) => {
                 console.log("Autoplay prevented:", error);
             });
         }
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener("resize", handleResize);
 
         const animateElements = () => {
             const elements = document.querySelectorAll(
@@ -30,7 +38,10 @@ const Home = () => {
                 }, 300 + i * 200);
             });
         };
+
         animateElements();
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     return (
@@ -43,7 +54,8 @@ const Home = () => {
                         loop
                         muted
                         playsInline
-                        className="video-tag">
+                        className="video-tag"
+                        poster={isMobile ? backgroundPoster : undefined}>
                         <source src={backgroundVideo} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
@@ -54,13 +66,13 @@ const Home = () => {
                     <h1 className="hero-heading">
                         Architectural{" "}
                         <span className="gold-accent">Excellence</span>
-                        <br />
+                        <br className="desktop-only" />
                         in Sustainable Materials
                     </h1>
                     <p className="hero-subheading">
                         Curated selection of premium, low-impact building
                         solutions
-                        <br />
+                        <br className="desktop-only" />
                         for discerning architects and developers
                     </p>
                     <div className="hero-buttons">

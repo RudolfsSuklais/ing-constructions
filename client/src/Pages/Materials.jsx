@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./Materials.css";
@@ -15,8 +15,40 @@ import InsulationImg from "../assets/materials/insulation.jpeg";
 import CeramicImg from "../assets/materials/ceramic-tiles.jpeg";
 
 const Materials = () => {
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        // Preload images for better UX
+        const imageUrls = [
+            AluminiumImg,
+            WoodImg,
+            ConcreteImg,
+            GlassImg,
+            RoofingImg,
+            MarbleImg,
+            SteelImg,
+            InsulationImg,
+            CeramicImg,
+        ];
+
+        Promise.all(
+            imageUrls.map((url) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            })
+        )
+            .then(() => {
+                setImagesLoaded(true);
+            })
+            .catch(() => {
+                setImagesLoaded(true); // Still show content even if some images fail
+            });
     }, []);
 
     const productFamilies = [
@@ -55,7 +87,6 @@ const Materials = () => {
                 "Durable roofing materials with both functionality and style.",
             image: RoofingImg,
         },
-
         {
             id: "marble",
             name: "Marble & Natural Stone",
@@ -105,6 +136,13 @@ const Materials = () => {
 
     return (
         <div className="materials-page">
+            {/* Loading State */}
+            {!imagesLoaded && (
+                <div className="loading-overlay">
+                    <div className="loading-spinner"></div>
+                </div>
+            )}
+
             {/* Hero Section */}
             <section className="materials-hero">
                 <div className="hero-content">
@@ -128,7 +166,9 @@ const Materials = () => {
             </section>
 
             {/* Product Families Grid */}
-            <section className="materials-container">
+            <section
+                className="materials-container"
+                aria-label="Product categories">
                 <div className="materials-grid families-grid">
                     {productFamilies.map((family, index) => (
                         <motion.div
@@ -137,14 +177,18 @@ const Materials = () => {
                             whileInView="onscreen"
                             viewport={{ once: true, amount: 0.3 }}
                             variants={cardVariants}
-                            key={family.id}>
-                            <Link to={`/materials/${family.id}`}>
+                            key={family.id}
+                            style={{ animationDelay: `${index * 0.1}s` }}>
+                            <Link
+                                to={`/materials/${family.id}`}
+                                aria-label={`View ${family.name}`}>
                                 <div className="card-inner">
                                     <div className="card-image-container">
                                         <img
                                             src={family.image}
                                             alt={family.name}
                                             className="card-image"
+                                            loading="lazy"
                                         />
                                         <div className="card-overlay"></div>
                                         <div className="card-shine"></div>

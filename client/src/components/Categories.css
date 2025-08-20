@@ -1,5 +1,14 @@
+/* Categories.css */
+:root {
+    --slate-dark: #0f1518;
+    --slate: #1a2328;
+    --gold-accent: #c4a86f;
+    --gold-dark: #a88c55;
+    --champagne: #e8d8b8;
+}
+
 .categories-section {
-    padding: 140px 40px;
+    padding: 80px 20px;
     background-color: var(--slate-dark);
     position: relative;
     overflow: hidden;
@@ -22,25 +31,25 @@
 
 .categories-header {
     max-width: 1200px;
-    margin: 0 auto 80px;
+    margin: 0 auto 60px;
     text-align: center;
     position: relative;
     z-index: 2;
 }
 
 .categories-title {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 300;
     letter-spacing: -0.5px;
-    color: var(--slate);
-    margin-bottom: 20px;
+    color: white;
+    margin-bottom: 16px;
     line-height: 1.2;
 }
 
 .categories-subtitle {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--gold-accent);
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     font-weight: 300;
     position: relative;
@@ -50,18 +59,18 @@
 .categories-subtitle::after {
     content: "";
     position: absolute;
-    bottom: -12px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 50px;
     height: 1px;
     background-color: var(--gold-accent);
 }
 
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 40px;
+    grid-template-columns: 1fr;
+    gap: 30px;
     max-width: 1300px;
     margin: 0 auto;
     position: relative;
@@ -71,10 +80,10 @@
 .categories-card {
     cursor: pointer;
     position: relative;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    height: 500px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    height: 400px;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -104,36 +113,36 @@
     height: 100%;
     background: linear-gradient(
         to top,
-        rgba(15, 21, 24, 0.6) 0%,
-        rgba(15, 21, 24, 0.2) 50%,
+        rgba(15, 21, 24, 0.8) 0%,
+        rgba(15, 21, 24, 0.4) 50%,
         transparent 100%
     );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 30px;
+    padding: 20px;
     color: white;
     border-radius: inherit;
-    transition: background 0.4s ease; /* smooth transition */
+    transition: background 0.4s ease;
 }
 
 .categories-card:hover .categories-card-overlay {
     background: linear-gradient(
         to top,
-        rgba(15, 21, 24, 0.9) 100%,
-        rgba(15, 21, 24, 0.5) 50%,
-        rgba(15, 21, 24, 0.2) 100%
+        rgba(15, 21, 24, 0.95) 0%,
+        rgba(15, 21, 24, 0.6) 50%,
+        rgba(15, 21, 24, 0.3) 100%
     );
 }
 
 .categories-card-content h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: var(--champagne);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     line-height: 1.3;
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
 }
 
 .categories-card-content h3::after {
@@ -141,14 +150,14 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 50px;
+    width: 40px;
     height: 2px;
     background-color: var(--gold-accent);
     transition: width 0.4s ease;
 }
 
 .categories-card:hover .categories-card-content h3::after {
-    width: 80px;
+    width: 60px;
 }
 
 .categories-hover-content {
@@ -161,22 +170,22 @@
 .categories-card:hover .categories-hover-content {
     max-height: 300px;
     opacity: 1;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .categories-hover-content p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(232, 216, 184, 0.9);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .categories-material-stat {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--gold-accent);
     font-weight: 500;
-    letter-spacing: 1px;
-    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
     display: inline-block;
     position: relative;
 }
@@ -184,16 +193,16 @@
 .categories-material-stat::after {
     content: "";
     position: absolute;
-    bottom: -8px;
+    bottom: -6px;
     left: 0;
-    width: 30px;
+    width: 25px;
     height: 1px;
     background-color: var(--gold-accent);
 }
 
 .categories-view-all-container {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 60px;
     position: relative;
     z-index: 2;
 }
@@ -207,9 +216,9 @@
     background: var(--gold-accent);
     color: var(--slate-dark);
     border: none;
-    padding: 14px 28px;
+    padding: 12px 20px;
     border-radius: 50px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
@@ -225,6 +234,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     background: var(--gold-accent);
     color: var(--slate-dark);
@@ -234,8 +244,8 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 30%;
-    justify-content: space-between;
+    width: 100%;
+    max-width: 280px;
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -263,15 +273,15 @@
 }
 
 .categories-material-cta:hover::before,
-.categories-view-all-materials::before {
+.categories-view-all-materials:hover::before {
     left: 100%;
 }
 
 /* subtle lift */
 .categories-material-cta:hover,
 .categories-view-all-materials:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(4, 178, 169, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(196, 168, 111, 0.3);
 }
 
 /* arrow icon animation */
@@ -282,7 +292,7 @@
 }
 
 .categories-material-cta:hover svg {
-    transform: translateX(6px);
+    transform: translateX(4px);
 }
 
 /* keep text above glow */
@@ -298,4 +308,166 @@
 
 .accent-light {
     color: azure;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+    .categories-section {
+        padding: 100px 40px;
+    }
+
+    .categories-title {
+        font-size: 2.5rem;
+    }
+
+    .categories-subtitle {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .categories-card {
+        height: 350px;
+    }
+
+    .categories-card-content h3 {
+        font-size: 1.6rem;
+    }
+
+    .categories-hover-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .categories-section {
+        padding: 120px 40px;
+    }
+
+    .categories-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .categories-card {
+        height: 450px;
+        border-radius: 16px;
+    }
+
+    .categories-card-overlay {
+        padding: 30px;
+    }
+
+    .categories-card-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .categories-view-all-materials {
+        width: auto;
+        min-width: 250px;
+    }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1280px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categories-card {
+        height: 500px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+    .categories-section {
+        padding: 60px 15px;
+    }
+
+    .categories-title {
+        font-size: 1.8rem;
+    }
+
+    .categories-card {
+        height: 350px;
+    }
+
+    .categories-card-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .categories-material-cta {
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+
+    .categories-view-all-materials {
+        padding: 12px 24px;
+        font-size: 0.85rem;
+        max-width: 240px;
+    }
+}
+
+/* Prevent hover effects on touch devices */
+@media (hover: none) {
+    .categories-card:hover {
+        transform: none;
+    }
+
+    .categories-card:hover .categories-card-image {
+        transform: none;
+    }
+
+    .categories-card:hover .categories-card-overlay {
+        background: linear-gradient(
+            to top,
+            rgba(15, 21, 24, 0.8) 0%,
+            rgba(15, 21, 24, 0.4) 50%,
+            transparent 100%
+        );
+    }
+
+    .categories-card:hover .categories-card-content h3::after {
+        width: 40px;
+    }
+
+    .categories-hover-content {
+        max-height: 300px;
+        opacity: 1;
+        margin-top: 15px;
+    }
+
+    .categories-material-cta:hover,
+    .categories-view-all-materials:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .categories-material-cta:hover::before,
+    .categories-view-all-materials:hover::before {
+        left: -100%;
+    }
+
+    .categories-material-cta:hover svg {
+        transform: none;
+    }
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 768px) {
+    .categories-material-cta,
+    .categories-view-all-materials {
+        min-height: 44px; /* Minimum touch target size */
+    }
 }

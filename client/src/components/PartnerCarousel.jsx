@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import "./PartnerCarousel.css";
 import Nefertity_logo from "../assets/logos/nefertity_logo.png";
 import Finestra_logo from "../assets/logos/Finestra_logo.png";
@@ -16,15 +17,34 @@ const logos = [
 const PartnerCarousel = () => {
     const trackRef = useRef(null);
     const [centerIndex, setCenterIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     useEffect(() => {
         const track = trackRef.current;
+        if (!track) return;
+
+        // For mobile, we'll use CSS animation instead of JS scrolling
+        if (isMobile) {
+            track.style.animation = "scroll 30s linear infinite";
+            return;
+        }
+
+        // For desktop, use the original JS scrolling logic
         const total = logos.length * 2;
         let scrollPos = 0;
+        let animationId;
 
-        const step = 1; // pixels per frame
-        const interval = setInterval(() => {
-            scrollPos += step;
+        const animate = () => {
+            scrollPos += 1; // pixels per frame
             if (scrollPos >= track.scrollWidth / 2) scrollPos = 0;
             track.scrollLeft = scrollPos;
 
@@ -42,10 +62,17 @@ const PartnerCarousel = () => {
                 }
             });
             setCenterIndex(closestIndex);
-        }, 20); // adjust speed
 
-        return () => clearInterval(interval);
-    }, []);
+            animationId = requestAnimationFrame(animate);
+        };
+
+        animationId = requestAnimationFrame(animate);
+
+        return () => {
+            cancelAnimationFrame(animationId);
+            track.style.animation = "none";
+        };
+    }, [isMobile]);
 
     return (
         <div className="partner-section">
@@ -70,7 +97,10 @@ const PartnerCarousel = () => {
                                         isCenter ? "center" : ""
                                     }`}
                                     key={idx}>
-                                    <img src={logo} alt={`Partner ${idx}`} />
+                                    <img
+                                        src={logo}
+                                        alt={`Partner ${idx % logos.length}`}
+                                    />
                                 </div>
                             );
                         })}
@@ -78,19 +108,27 @@ const PartnerCarousel = () => {
                 </div>
             </div>
             <div className="view-all-container">
-                <motion.button
-                    className="projects-view-all-button"
-                    transition={{ duration: 0.3 }}>
-                    View All Partners
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M5 12H19M19 12L12 5M19 12L12 19"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
-                    </svg>
-                </motion.button>
+                <Link to={"/partners"}>
+                    <motion.button
+                        className="view-all-button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ duration: 0.3 }}>
+                        View All Partners
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none">
+                            <path
+                                d="M5 12H19M19 12L12 5M19 12L12 19"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </motion.button>
+                </Link>
             </div>
         </div>
     );

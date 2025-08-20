@@ -1,0 +1,286 @@
+/* aluminium.css - Enhanced with better responsiveness */
+
+.aluminium-page {
+    background-color: var(--slate-dark);
+    padding-top: 120px;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Hero Section */
+.aluminium-hero {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+/* Manufacturer Selector Container */
+.manufacturer-selector-container {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.manufacturer-title {
+    text-align: center;
+    color: var(--champagne);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Manufacturer Selector */
+.manufacturer-selector {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.manufacturer-btn {
+    padding: 12px 28px;
+    border: 2px solid var(--gold-accent);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--gold-accent);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.manufacturer-btn:hover {
+    background: var(--gold-accent);
+    color: var(--slate-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+}
+
+.manufacturer-btn.active {
+    background: var(--gold-accent);
+    color: var(--slate-dark);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+}
+
+.manufacturer-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.manufacturer-description p {
+    color: var(--champagne-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Products Grid */
+.aluminium-container {
+    max-width: 1400px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+}
+
+.materials-grid.families-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+/* Product Type Badge */
+.product-type-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--gold-accent);
+    color: var(--slate-dark);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 3;
+}
+
+/* Technical Specs CTA */
+.aluminium-technical-cta {
+    background: linear-gradient(
+        135deg,
+        rgba(26, 34, 38, 0.9) 0%,
+        rgba(15, 21, 24, 0.95) 100%
+    );
+    border-top: 1px solid rgba(0, 255, 204, 0.2);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.technical-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.technical-cta-content h3 {
+    color: var(--champagne);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.technical-cta-content p {
+    color: var(--champagne-light);
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: transparent;
+    color: var(--gold-accent);
+    border: 2px solid var(--gold-accent);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.cta-button:hover {
+    background-color: var(--gold-accent);
+    color: var(--slate-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .materials-grid.families-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .aluminium-hero {
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aluminium-page {
+        padding-top: 120px;
+    }
+
+    .manufacturer-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .manufacturer-btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .materials-grid.families-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .manufacturer-description p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aluminium-page {
+        padding-top: 120px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .manufacturer-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .premium-card {
+        height: 440px;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .technical-cta-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .technical-cta-content p {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+.aluminium-page .view-all-button {
+    padding: 7px 28px;
+    font-size: 0.9rem;
+    border-radius: 16px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .premium-card,
+    .premium-card *,
+    .manufacturer-btn,
+    .cta-button {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .premium-card:hover .card-inner {
+        transform: none;
+    }
+
+    .manufacturer-btn:hover {
+        transform: none;
+    }
+
+    .cta-button:hover {
+        transform: none;
+    }
+}
