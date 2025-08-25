@@ -9,24 +9,24 @@ const Sustainability = () => {
     const metrics = [
         {
             id: 1,
-            title: "Carbon Reduction",
-            value: "42%",
-            description: "Lower embodied carbon vs traditional materials",
-            icon: "🌿",
+            title: "Total Orders",
+            value: "12,458",
+            description: "Completed projects worldwide",
+            icon: "📦",
         },
         {
             id: 2,
-            title: "Recycled Content",
-            value: "78%",
-            description: "Average post-industrial recycled material",
-            icon: "♻️",
+            title: "Materials Delivered",
+            value: "42,850",
+            description: "Tons of premium materials supplied",
+            icon: "🚚",
         },
         {
             id: 3,
-            title: "Energy Savings",
-            value: "35%",
-            description: "Reduced operational energy in buildings",
-            icon: "⚡",
+            title: "Total Projects",
+            value: "3,247",
+            description: "Successful installations globally",
+            icon: "🏗️",
         },
     ];
 
@@ -38,15 +38,15 @@ const Sustainability = () => {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.2, duration: 0.8 }}
                     className="sust-title">
-                    <span className="accent-2">Environmental</span>{" "}
-                    <span className="accent-1">Stewardship</span>
+                    <span className="accent-2">Global</span>{" "}
+                    <span className="accent-1">Impact</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.4, duration: 0.8 }}
                     className="sust-subtitle">
-                    Measurable impact through material innovation
+                    Delivering excellence across continents
                 </motion.p>
             </div>
 
@@ -90,7 +90,7 @@ const Sustainability = () => {
             </motion.div>
 
             <div className="sust-certifications">
-                <h4>Certifications & Standards</h4>
+                <h4>Global Reach & Certifications</h4>
                 <div className="sust-cert-logos-container">
                     <motion.div
                         className="sust-cert-logos"
@@ -102,10 +102,10 @@ const Sustainability = () => {
                         }}>
                         {[...Array(2)].map((_, i) => (
                             <React.Fragment key={i}>
-                                <span>FSC®</span>
-                                <span>EPD</span>
-                                <span>Cradle to Cradle</span>
-                                <span>BREEAM A+</span>
+                                <span>ISO 9001</span>
+                                <span>FSC® Certified</span>
+                                <span>Global Delivery</span>
+                                <span>Quality Assured</span>
                             </React.Fragment>
                         ))}
                     </motion.div>

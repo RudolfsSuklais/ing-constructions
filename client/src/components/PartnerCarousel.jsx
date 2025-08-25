@@ -17,62 +17,59 @@ const logos = [
 const PartnerCarousel = () => {
     const trackRef = useRef(null);
     const [centerIndex, setCenterIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-        };
-
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    const animationRef = useRef(null);
 
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        // For mobile, we'll use CSS animation instead of JS scrolling
-        if (isMobile) {
-            track.style.animation = "scroll 30s linear infinite";
-            return;
-        }
+        // Reset scroll position to avoid jump on mount
+        track.scrollLeft = 0;
 
-        // For desktop, use the original JS scrolling logic
-        const total = logos.length * 2;
-        let scrollPos = 0;
-        let animationId;
+        let lastTime = performance.now();
+        const speed = 40; // pixels per second
 
-        const animate = () => {
-            scrollPos += 1; // pixels per frame
-            if (scrollPos >= track.scrollWidth / 2) scrollPos = 0;
-            track.scrollLeft = scrollPos;
+        const autoScroll = (time) => {
+            const delta = (time - lastTime) / 1000; // seconds since last frame
+            lastTime = time;
 
-            // calculate center logo
+            track.scrollLeft += speed * delta;
+
+            // Reset to beginning when reaching halfway (since we duplicated the logos)
+            if (track.scrollLeft >= track.scrollWidth / 2) {
+                track.scrollLeft = 0;
+            }
+
+            // Center detection
+            const scrollPos = track.scrollLeft;
             const children = Array.from(track.children);
             const centerX = track.offsetWidth / 2 + scrollPos;
+
             let closestIndex = 0;
             let minDist = Infinity;
+
             children.forEach((child, idx) => {
                 const childCenter = child.offsetLeft + child.offsetWidth / 2;
                 const dist = Math.abs(childCenter - centerX);
                 if (dist < minDist) {
                     minDist = dist;
-                    closestIndex = idx % logos.length; // modulo for duplicate logos
+                    closestIndex = idx;
                 }
             });
-            setCenterIndex(closestIndex);
 
-            animationId = requestAnimationFrame(animate);
+            setCenterIndex(closestIndex % logos.length); // Use modulo to get original index
+
+            animationRef.current = requestAnimationFrame(autoScroll);
         };
 
-        animationId = requestAnimationFrame(animate);
+        animationRef.current = requestAnimationFrame(autoScroll);
 
         return () => {
-            cancelAnimationFrame(animationId);
-            track.style.animation = "none";
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+            }
         };
-    }, [isMobile]);
+    }, []);
 
     return (
         <div className="partner-section">
@@ -89,8 +86,10 @@ const PartnerCarousel = () => {
             <div className="partner-carousel-container">
                 <div className="partner-carousel">
                     <div className="carousel-track" ref={trackRef}>
-                        {logos.concat(logos).map((logo, idx) => {
-                            const isCenter = idx % logos.length === centerIndex;
+                        {[...logos, ...logos].map((logo, idx) => {
+                            const originalIndex = idx % logos.length;
+                            const isCenter = originalIndex === centerIndex;
+
                             return (
                                 <div
                                     className={`carousel-item ${
@@ -99,7 +98,7 @@ const PartnerCarousel = () => {
                                     key={idx}>
                                     <img
                                         src={logo}
-                                        alt={`Partner ${idx % logos.length}`}
+                                        alt={`Partner ${originalIndex}`}
                                     />
                                 </div>
                             );
@@ -107,6 +106,7 @@ const PartnerCarousel = () => {
                     </div>
                 </div>
             </div>
+
             <div className="view-all-container">
                 <Link to={"/partners"}>
                     <motion.button

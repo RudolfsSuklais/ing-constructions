@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.css";
-import Logo from "../assets/ing-logo-4.png";
+import Logo from "../assets/construction.png";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
@@ -9,7 +9,7 @@ const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 80); // scroll threshold
+            setScrolled(window.scrollY > 80);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -37,6 +37,10 @@ const NavBar = () => {
                     </NavLink>
                     <NavLink to="/materials" className="nav-link">
                         Materials
+                    </NavLink>
+
+                    <NavLink to="/projects" className="nav-link">
+                        Projects
                     </NavLink>
                     <NavLink to="/about" className="nav-link">
                         About

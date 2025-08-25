@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "./About.css";
 
 // Team member images (replace with your actual team photos)
-import CEO from "../assets/materials/aluminium-facade.jpg";
+import SALES from "../assets/Sales.jpg";
 import Architect from "../assets/materials/aluminium-facade.jpg";
 import Engineer from "../assets/materials/aluminium-facade.jpg";
 import Designer from "../assets/materials/aluminium-facade.jpg";
@@ -16,10 +16,10 @@ const About = () => {
     const teamMembers = [
         {
             id: 1,
-            name: "Michael Chen",
-            role: "Founder & CEO",
-            bio: "With over 15 years in construction materials distribution, Michael founded ing-construction-materials to bridge quality materials with visionary architects.",
-            image: CEO,
+            name: "Abdelrahman Abdelaziz",
+            role: "Sales & Logistics",
+            bio: "Abdelrahman specializes in building strong client relationships and ensuring seamless coordination between sales and logistics.",
+            image: SALES,
         },
         {
             id: 2,

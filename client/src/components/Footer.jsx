@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/ing-logo-4.png";
+import Logo from "../assets/construction.png";
 import "./Footer.css";
 
 const Footer = () => {
@@ -50,16 +50,16 @@ const Footer = () => {
                             <h4 className="footer-title">Company</h4>
                             <ul>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="/about">About Us</a>
                                 </li>
                                 <li>
-                                    <a href="#">Our Process</a>
+                                    <a href="/partners">Partners</a>
                                 </li>
                                 <li>
-                                    <a href="#">Sustainability</a>
+                                    <a href="/projects">Projects</a>
                                 </li>
                                 <li>
-                                    <a href="#">Careers</a>
+                                    <a href="/contact">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,7 +77,7 @@ const Footer = () => {
                                     <a href="#">Material Library</a>
                                 </li>
                                 <li>
-                                    <a href="#">FAQ</a>
+                                    <a href="/contact">FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -109,8 +109,8 @@ const Footer = () => {
                         ING-CONSTRUCTION-MATERIALS. All rights reserved.
                     </p>
                     <div className="footer-legal-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <a href="/privacy-policy">Privacy Policy</a>
+                        <a href="/terms-of-service">Terms of Service</a>
                     </div>
                 </div>
             </div>

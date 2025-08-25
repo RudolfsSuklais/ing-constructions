@@ -11,7 +11,7 @@ import FacadeImg from "../assets/materials/aluminium-facade.jpg";
 const manufacturersData = [
     {
         name: "Finestra Solution",
-        description: "German-engineered premium aluminium systems.",
+        description: "Latvian-engineered premium aluminium systems.",
         products: [
             {
                 id: 1,
@@ -50,15 +50,15 @@ const manufacturersData = [
         ],
     },
     {
-        name: "Aluprof",
+        name: "Rabel Systems",
         description: "Modern and durable aluminium systems for all projects.",
         products: [
             {
                 id: 5,
-                name: "Window AL-400",
-                type: "Window",
+                name: "Rabel Envelop 3D",
+                type: "Facade",
                 image: WindowImg,
-                specs: "Thermal improvement, Air permeability: Class 4",
+                specs: "Slim, seamless, and highly flexible facade system.",
             },
             {
                 id: 6,

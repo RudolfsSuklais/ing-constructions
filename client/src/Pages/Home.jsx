@@ -5,7 +5,7 @@ import PartnerCarousel from "../components/PartnerCarousel";
 import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
 import { Link } from "react-router-dom";
-import backgroundVideo from "../assets/materials_bg-2.mp4"; // Replace with your video path
+import backgroundVideo from "../assets/background_vid_1.mp4"; // Replace with your video path
 import backgroundPoster from "../assets/aluminium-facade.jpg"; // Add a poster image for mobile
 import CTASection from "../components/CTASection";
 
@@ -82,10 +82,12 @@ const Home = () => {
                                 <span className="cta-icon">→</span>
                             </button>
                         </Link>
-                        <button className="hero-cta secondary">
-                            Request Consultation
-                            <span className="cta-icon">✉</span>
-                        </button>
+                        <Link to={"/contact"}>
+                            <button className="hero-cta secondary">
+                                Request Consultation
+                                <span className="cta-icon">✉</span>
+                            </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="luxury-scroll-hint">

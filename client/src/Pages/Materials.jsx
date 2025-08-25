@@ -267,12 +267,16 @@ const Materials = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         viewport={{ once: true }}
                         className="cta-actions">
-                        <button className="view-all-button">
-                            Consult Experts
-                        </button>
-                        <button className="view-all-button-secondary">
-                            Request Catalog
-                        </button>
+                        <Link to={"/contact"}>
+                            <button className="view-all-button">
+                                Consult Experts
+                            </button>
+                        </Link>
+                        <Link to={"/contact"}>
+                            <button className="view-all-button-secondary">
+                                Request Catalog
+                            </button>
+                        </Link>
                     </motion.div>
                 </div>
             </section>

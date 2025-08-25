@@ -20,6 +20,9 @@ const Partners = () => {
     const [worldData, setWorldData] = useState(null);
     const mapRef = useRef(null);
     const svgRef = useRef(null);
+    const zoom = useRef(null);
+    const projection = useRef(null);
+    const path = useRef(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -105,11 +108,16 @@ const Partners = () => {
 
     useEffect(() => {
         if (worldData && svgRef.current) {
-            drawMap();
+            initializeMap();
         }
-    }, [worldData, partners, hoveredPartner, selectedPartner]);
+    }, [worldData]);
 
-    const drawMap = () => {
+    useEffect(() => {
+        // Update markers when selection changes
+        updateMarkers();
+    }, [hoveredPartner, selectedPartner]);
+
+    const initializeMap = () => {
         const width = 800;
         const height = 450;
         const svg = d3.select(svgRef.current);
@@ -117,18 +125,22 @@ const Partners = () => {
         // Clear previous map
         svg.selectAll("*").remove();
 
+        // Create a group for the map that will be transformed
+        const mapGroup = svg.append("g").attr("class", "map-group");
+
         // Create projection
-        const projection = d3Geo
+        projection.current = d3Geo
             .geoMercator()
             .scale(130)
             .center([0, 30])
             .translate([width / 2, height / 2]);
 
         // Create path generator
-        const path = d3Geo.geoPath().projection(projection);
+        path.current = d3Geo.geoPath().projection(projection.current);
 
         // Draw countries
-        svg.append("g")
+        mapGroup
+            .append("g")
             .selectAll("path")
             .data(
                 topojson.feature(worldData, worldData.objects.countries)
@@ -136,36 +148,68 @@ const Partners = () => {
             )
             .enter()
             .append("path")
-            .attr("d", path)
+            .attr("d", path.current)
             .attr("fill", "rgba(26, 34, 38, 0.5)")
             .attr("stroke", "rgba(232, 241, 232, 0.2)")
             .attr("stroke-width", 0.5);
 
         // Draw partner markers
-        svg.selectAll("circle")
+        drawMarkers();
+
+        // Set up zoom behavior
+        setupZoom();
+    };
+
+    const drawMarkers = () => {
+        const svg = d3.select(svgRef.current);
+        const mapGroup = svg.select(".map-group");
+
+        // Remove existing markers
+        mapGroup.selectAll(".partner-marker").remove();
+        mapGroup.selectAll(".partner-label").remove();
+        mapGroup.selectAll(".partner-logo").remove();
+
+        // Draw partner markers with larger size
+        mapGroup
+            .selectAll(".partner-marker")
             .data(partners)
             .enter()
             .append("circle")
-            .attr("cx", (d) => projection([d.location.lng, d.location.lat])[0])
-            .attr("cy", (d) => projection([d.location.lng, d.location.lat])[1])
+            .attr("class", "partner-marker")
+            .attr(
+                "cx",
+                (d) => projection.current([d.location.lng, d.location.lat])[0]
+            )
+            .attr(
+                "cy",
+                (d) => projection.current([d.location.lng, d.location.lat])[1]
+            )
             .attr("r", (d) => {
-                if (selectedPartner && selectedPartner.id === d.id) return 6;
-                if (hoveredPartner === d.id) return 5;
-                return 4;
+                if (selectedPartner && selectedPartner.id === d.id) return 12;
+                if (hoveredPartner === d.id) return 10;
+                return 8;
             })
             .attr("fill", (d) => categoryColors[d.category])
             .attr("stroke", "#0f1518")
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .on("mouseover", (event, d) => {
                 setHoveredPartner(d.id);
-                // Add tooltip
+                // Add tooltip with logo
                 const tooltip = d3.select("#map-tooltip");
                 tooltip
                     .style("opacity", 1)
-                    .html(`<strong>${d.name}</strong><br>${d.location.country}`)
+                    .html(
+                        `
+                        <div class="tooltip-content">
+                            <img src="${d.logo}" alt="${d.name}" class="tooltip-logo" />
+                            <h4>${d.name}</h4>
+                            <p>${d.location.country}</p>
+                        </div>
+                    `
+                    )
                     .style("left", event.pageX + 10 + "px")
-                    .style("top", event.pageY - 28 + "px");
+                    .style("top", event.pageY - 100 + "px");
             })
             .on("mouseout", () => {
                 setHoveredPartner(null);
@@ -174,7 +218,8 @@ const Partners = () => {
             .on("click", (event, d) => handlePartnerSelect(d));
 
         // Add labels for hovered/selected partners
-        svg.selectAll("text")
+        mapGroup
+            .selectAll(".partner-label")
             .data(
                 partners.filter(
                     (d) =>
@@ -184,21 +229,128 @@ const Partners = () => {
             )
             .enter()
             .append("text")
-            .attr("x", (d) => projection([d.location.lng, d.location.lat])[0])
+            .attr("class", "partner-label")
+            .attr(
+                "x",
+                (d) => projection.current([d.location.lng, d.location.lat])[0]
+            )
             .attr(
                 "y",
-                (d) => projection([d.location.lng, d.location.lat])[1] - 10
+                (d) =>
+                    projection.current([d.location.lng, d.location.lat])[1] - 15
             )
             .text((d) => d.name)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
-            .style("font-size", "10px")
+            .style("font-size", "12px")
             .style("pointer-events", "none")
             .style("paint-order", "stroke")
             .style("stroke", "#1a2226")
             .style("stroke-width", "3px")
             .style("stroke-linecap", "round")
             .style("stroke-linejoin", "round");
+    };
+
+    const updateMarkers = () => {
+        const svg = d3.select(svgRef.current);
+        const mapGroup = svg.select(".map-group");
+
+        // Update marker sizes based on selection
+        mapGroup
+            .selectAll(".partner-marker")
+            .attr("r", (d) => {
+                if (selectedPartner && selectedPartner.id === d.id) return 12;
+                if (hoveredPartner === d.id) return 10;
+                return 8;
+            })
+            .attr("stroke-width", (d) => {
+                if (selectedPartner && selectedPartner.id === d.id) return 3;
+                if (hoveredPartner === d.id) return 2;
+                return 2;
+            });
+
+        // Update labels
+        mapGroup.selectAll(".partner-label").remove();
+
+        mapGroup
+            .selectAll(".partner-label")
+            .data(
+                partners.filter(
+                    (d) =>
+                        hoveredPartner === d.id ||
+                        (selectedPartner && selectedPartner.id === d.id)
+                )
+            )
+            .enter()
+            .append("text")
+            .attr("class", "partner-label")
+            .attr(
+                "x",
+                (d) => projection.current([d.location.lng, d.location.lat])[0]
+            )
+            .attr(
+                "y",
+                (d) =>
+                    projection.current([d.location.lng, d.location.lat])[1] - 15
+            )
+            .text((d) => d.name)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .style("font-size", "12px")
+            .style("pointer-events", "none")
+            .style("paint-order", "stroke")
+            .style("stroke", "#1a2226")
+            .style("stroke-width", "3px")
+            .style("stroke-linecap", "round")
+            .style("stroke-linejoin", "round");
+    };
+
+    const setupZoom = () => {
+        const svg = d3.select(svgRef.current);
+
+        // Set up zoom behavior
+        zoom.current = d3
+            .zoom()
+            .scaleExtent([0.5, 8])
+            .on("zoom", (event) => {
+                const { transform } = event;
+
+                // Apply the transform to the map group (which includes markers)
+                svg.select(".map-group").attr("transform", transform);
+
+                // Adjust marker sizes based on zoom level
+                svg.selectAll(".partner-marker").attr("r", (d) => {
+                    let baseSize = 8;
+                    if (selectedPartner && selectedPartner.id === d.id)
+                        baseSize = 12;
+                    if (hoveredPartner === d.id) baseSize = 10;
+                    return baseSize / transform.k;
+                });
+
+                // Adjust label sizes based on zoom level
+                svg.selectAll(".partner-label").style(
+                    "font-size",
+                    `${12 / transform.k}px`
+                );
+            });
+
+        // Apply zoom behavior to the SVG
+        svg.call(zoom.current);
+    };
+
+    const handleZoomIn = () => {
+        const svg = d3.select(svgRef.current);
+        zoom.current.scaleBy(svg, 1.5);
+    };
+
+    const handleZoomOut = () => {
+        const svg = d3.select(svgRef.current);
+        zoom.current.scaleBy(svg, 0.75);
+    };
+
+    const handleResetZoom = () => {
+        const svg = d3.select(svgRef.current);
+        zoom.current.transform(svg, d3.zoomIdentity);
     };
 
     const filterPartners = (category) => {
@@ -294,11 +446,120 @@ const Partners = () => {
             <section className="partners-map-section" ref={mapRef}>
                 <div className="map-container">
                     <div className="world-map">
-                        <h3>Our Global Partners Network</h3>
+                        <div className="map-header">
+                            <h3>Our Global Partners Network</h3>
+                        </div>
+                        <div className="zoom-instruction">
+                            <span>Use mouse wheel to zoom, drag to pan</span>
+                        </div>
                         <svg
                             ref={svgRef}
                             viewBox="0 0 800 450"
                             className="world-map-svg"></svg>
+
+                        {/* Zoom controls positioned at bottom right */}
+                        <div className="map-controls-container">
+                            <div className="map-controls">
+                                <button
+                                    className="map-control-btn"
+                                    onClick={handleZoomIn}
+                                    title="Zoom In">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 5V19"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M5 12H19"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                </button>
+                                <button
+                                    className="map-control-btn"
+                                    onClick={handleZoomOut}
+                                    title="Zoom Out">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M5 12H19"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                </button>
+                                <button
+                                    className="map-control-btn"
+                                    onClick={handleResetZoom}
+                                    title="Reset View">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M14 6L21 3V11L18 9"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M10 18L3 21V13L6 15"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M14 6L10 18"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M10 18L6 15"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M14 6L18 9"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M18 9L21 11"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M6 15L3 13"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="map-legend">

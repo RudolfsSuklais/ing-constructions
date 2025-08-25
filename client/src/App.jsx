@@ -10,6 +10,9 @@ import Contact from "./Pages/Contact.jsx";
 import BackToTop from "./components/BackToTop.jsx";
 import Aluminium from "./MaterialsPage/Aluminium.jsx";
 import Partners from "./Pages/Partners.jsx";
+import ProjectsPage from "./Pages/ProjectsPage.jsx";
+import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
+import TermsOfService from "./Pages/TermsOfService.jsx";
 
 function App() {
     return (
@@ -19,9 +22,12 @@ function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/materials/aluminium" element={<Aluminium />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/partners" element={<Partners />} />
                 <Route

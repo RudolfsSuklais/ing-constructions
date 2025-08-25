@@ -90,6 +90,13 @@
     align-items: center;
     height: 100%;
     width: max-content;
+    overflow-x: hidden; /* Changed from auto to hidden */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
 }
 
 .carousel-item {
@@ -117,16 +124,6 @@
     filter: grayscale(0%) brightness(1);
     opacity: 1;
     transform: scale(1.15);
-}
-
-/* Animation for mobile */
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
 }
 
 .view-all-container {
@@ -261,10 +258,6 @@
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .carousel-track {
-        animation: none !important;
-    }
-
     .carousel-item {
         transition: none;
     }
@@ -275,5 +268,9 @@
 
     .view-all-button {
         transition: none;
+    }
+
+    .carousel-track {
+        animation: none;
     }
 }
