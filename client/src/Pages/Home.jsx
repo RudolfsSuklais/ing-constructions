@@ -5,9 +5,11 @@ import PartnerCarousel from "../components/PartnerCarousel";
 import Projects from "../components/Projects";
 import Sustainability from "../components/Sustainability";
 import { Link } from "react-router-dom";
-import backgroundVideo from "../assets/background_vid_1.mp4"; // Replace with your video path
+import backgroundVideo from "../assets/background_video_5.mp4"; // Replace with your video path
 import backgroundPoster from "../assets/aluminium-facade.jpg"; // Add a poster image for mobile
 import CTASection from "../components/CTASection";
+import LeadersCarousel from "../components/LeaderCarousel";
+import PrescuroShowcase from "../components/PrescuroShowcase";
 
 const Home = () => {
     const videoRef = useRef(null);
@@ -97,9 +99,11 @@ const Home = () => {
             </section>
 
             <Categories />
+            <PrescuroShowcase />
             <PartnerCarousel />
             <Projects />
             <Sustainability />
+            <LeadersCarousel />
             <CTASection />
         </>
     );

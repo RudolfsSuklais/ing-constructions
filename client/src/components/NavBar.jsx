@@ -39,6 +39,13 @@ const NavBar = () => {
                         Materials
                     </NavLink>
 
+                    <NavLink
+                        to="/modular-housing"
+                        className="nav-link modular-highlight">
+                        Modular Housing
+                        <span className="highlight-badge">New</span>
+                    </NavLink>
+
                     <NavLink to="/projects" className="nav-link">
                         Projects
                     </NavLink>

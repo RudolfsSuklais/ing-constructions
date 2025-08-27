@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import "./Contact.css";
 
 // Contact images
-import OfficeImg from "../assets/materials/aluminium-facade.jpg";
-import ShowroomImg from "../assets/materials/aluminium-facade.jpg";
+import NefertityOffice from "../assets/Nefertity_office.png";
+import LondonOffice from "../assets/london_office.jpg";
+import SwedenOffice from "../assets/sweden_office.jpg";
 
 const Contact = () => {
     useEffect(() => {
@@ -43,27 +44,27 @@ const Contact = () => {
     const offices = [
         {
             id: 1,
-            city: "New York",
-            address: "123 Architectural Avenue, Manhattan, NY 10001",
-            phone: "+1 (212) 555-7890",
-            email: "ny@ing-construction.com",
-            image: OfficeImg,
+            city: "Dubai",
+            address: "Office No. 15A, Silver Tower, Jumierah Lake Towers",
+            phone: "+971 4 3997774",
+            email: "sales-dubai@ing-construction-materials.com",
+            image: NefertityOffice,
         },
         {
             id: 2,
-            city: "London",
-            address: "45 Design District, Shoreditch, London E1 6AN",
-            phone: "+44 20 7946 0958",
-            email: "london@ing-construction.com",
-            image: ShowroomImg,
+            city: "Sweden",
+            address: "Box 2888, 187 28 Täby, Stockholm",
+            phone: "+46 768 518 236",
+            email: "sales-sweden@ing-construction-materials.com",
+            image: SwedenOffice,
         },
         {
             id: 3,
-            city: "Dubai",
-            address: "78 Innovation Tower, Downtown Dubai, UAE",
+            city: "London",
+            address: "41 Main Road London N76 2IM",
             phone: "+971 4 567 8901",
-            email: "dubai@ing-construction.com",
-            image: OfficeImg,
+            email: "sales-london@ing-construction.com",
+            image: LondonOffice,
         },
     ];
 
@@ -248,6 +249,7 @@ const Contact = () => {
                                     <label htmlFor="email">
                                         Email Address *
                                     </label>
+
                                     <input
                                         type="email"
                                         id="email"
@@ -356,12 +358,15 @@ const Contact = () => {
                                         </div>
                                         <div className="office-details">
                                             <p className="office-address">
+                                                <i class="fa-solid fa-location-dot"></i>{" "}
                                                 {office.address}
                                             </p>
                                             <p className="office-contact">
+                                                <i class="fa-solid fa-phone"></i>{" "}
                                                 {office.phone}
                                             </p>
                                             <p className="office-email">
+                                                <i class="fa-solid fa-envelope"></i>{" "}
                                                 {office.email}
                                             </p>
                                         </div>

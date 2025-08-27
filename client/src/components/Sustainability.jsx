@@ -2,6 +2,14 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "./Sustainability.css";
 
+// Import certification images
+import ISO9001 from "../assets/iso-9001.png";
+import FSC from "../assets/fsc-certified.webp";
+import ISO14001 from "../assets/iso-14001.png";
+import Leed from "../assets/leed-certification.png";
+import PEFC from "../assets/PEFC.png";
+import BREEAM from "../assets/BEEAM.png";
+
 const Sustainability = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -28,6 +36,16 @@ const Sustainability = () => {
             description: "Successful installations globally",
             icon: "🏗️",
         },
+    ];
+
+    // Certification images array
+    const certifications = [
+        { id: 1, image: ISO9001, alt: "ISO 9001 Certified" },
+        { id: 2, image: FSC, alt: "FSC Certified" },
+        { id: 3, image: ISO14001, alt: "ISO 14001 Certified" },
+        { id: 4, image: Leed, alt: "Leed Certification" },
+        { id: 5, image: PEFC, alt: "PEFC Certification" },
+        { id: 6, image: BREEAM, alt: "BREEAM Certification" },
     ];
 
     return (
@@ -100,14 +118,20 @@ const Sustainability = () => {
                             duration: 20,
                             ease: "linear",
                         }}>
-                        {[...Array(2)].map((_, i) => (
-                            <React.Fragment key={i}>
-                                <span>ISO 9001</span>
-                                <span>FSC® Certified</span>
-                                <span>Global Delivery</span>
-                                <span>Quality Assured</span>
-                            </React.Fragment>
-                        ))}
+                        {/* Duplicate the certifications array to create seamless loop */}
+                        {[...certifications, ...certifications].map(
+                            (cert, i) => (
+                                <div
+                                    key={`${cert.id}-${i}`}
+                                    className="sust-cert-item">
+                                    <img
+                                        src={cert.image}
+                                        alt={cert.alt}
+                                        className="sust-cert-image"
+                                    />
+                                </div>
+                            )
+                        )}
                     </motion.div>
                 </div>
             </div>

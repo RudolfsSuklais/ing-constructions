@@ -18,57 +18,55 @@ const PartnerCarousel = () => {
     const trackRef = useRef(null);
     const [centerIndex, setCenterIndex] = useState(0);
     const animationRef = useRef(null);
+    const scrollPosRef = useRef(0);
 
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        // Reset scroll position to avoid jump on mount
-        track.scrollLeft = 0;
-
         let lastTime = performance.now();
-        const speed = 40; // pixels per second
+        const speed = 40; // px per second
 
         const autoScroll = (time) => {
-            const delta = (time - lastTime) / 1000; // seconds since last frame
+            const delta = (time - lastTime) / 1000;
             lastTime = time;
 
-            track.scrollLeft += speed * delta;
+            // Move the track
+            scrollPosRef.current -= speed * delta;
+            track.style.transform = `translateX(${scrollPosRef.current}px)`;
 
-            // Reset to beginning when reaching halfway (since we duplicated the logos)
-            if (track.scrollLeft >= track.scrollWidth / 2) {
-                track.scrollLeft = 0;
+            // Reset position seamlessly when first half fully scrolled
+            if (Math.abs(scrollPosRef.current) >= track.scrollWidth / 2) {
+                scrollPosRef.current = 0;
             }
 
             // Center detection
-            const scrollPos = track.scrollLeft;
+            const containerCenter = track.parentElement.offsetWidth / 2;
             const children = Array.from(track.children);
-            const centerX = track.offsetWidth / 2 + scrollPos;
 
             let closestIndex = 0;
             let minDist = Infinity;
 
             children.forEach((child, idx) => {
-                const childCenter = child.offsetLeft + child.offsetWidth / 2;
-                const dist = Math.abs(childCenter - centerX);
+                const childCenter =
+                    child.offsetLeft +
+                    child.offsetWidth / 2 +
+                    scrollPosRef.current;
+                const dist = Math.abs(childCenter - containerCenter);
                 if (dist < minDist) {
                     minDist = dist;
                     closestIndex = idx;
                 }
             });
 
-            setCenterIndex(closestIndex % logos.length); // Use modulo to get original index
+            setCenterIndex(closestIndex % logos.length);
 
             animationRef.current = requestAnimationFrame(autoScroll);
         };
 
         animationRef.current = requestAnimationFrame(autoScroll);
 
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
+        return () => cancelAnimationFrame(animationRef.current);
     }, []);
 
     return (

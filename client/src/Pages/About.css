@@ -233,6 +233,17 @@
     overflow: hidden;
 }
 
+.team-contact {
+    display: flex;
+    flex-direction: column; /* stack vertically */
+    gap: 5px; /* small spacing between phone and email */
+    color: var(--gold-accent);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
 .team-image-container img {
     width: 100%;
     height: 100%;

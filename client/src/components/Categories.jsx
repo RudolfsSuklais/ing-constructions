@@ -4,11 +4,11 @@ import "./Categories.css";
 import { Link } from "react-router-dom";
 
 // Import high-quality images
-import AluminiumImage from "../assets/materials/glass_construction.jpg";
+import AluminiumImage from "../assets/aluminium-facade-2.webp";
 import PlywoodImage from "../assets/materials/marble.jpg";
 import SteelImage from "../assets/materials/steel_bar.jpeg";
 import ConcreteImage from "../assets/materials/ceramic-tiles.jpeg";
-import TimberImage from "../assets/materials/timber-products.jpg";
+import TimberImage from "../assets/wooden_facade.jpg";
 import ParquetImage from "../assets/materials/parquet-products.jpg";
 
 const Categories = () => {

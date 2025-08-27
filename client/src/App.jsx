@@ -13,6 +13,7 @@ import Partners from "./Pages/Partners.jsx";
 import ProjectsPage from "./Pages/ProjectsPage.jsx";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import TermsOfService from "./Pages/TermsOfService.jsx";
+import ModularHousing from "./Pages/ModularHousing.jsx";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/partners" element={<Partners />} />
+                <Route path="/modular-housing" element={<ModularHousing />} />
                 <Route
                     path="/materials/docs/:materialId"
                     element={<MaterialDocPage />}

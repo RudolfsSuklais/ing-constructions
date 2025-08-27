@@ -87,12 +87,8 @@
 
 .carousel-track {
     display: flex;
-    align-items: center;
     height: 100%;
-    width: max-content;
-    overflow-x: hidden; /* Changed from auto to hidden */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    will-change: transform;
 }
 
 .carousel-track::-webkit-scrollbar {
@@ -268,9 +264,5 @@
 
     .view-all-button {
         transition: none;
-    }
-
-    .carousel-track {
-        animation: none;
     }
 }

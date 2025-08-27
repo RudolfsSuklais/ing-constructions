@@ -18,6 +18,8 @@ const About = () => {
             id: 1,
             name: "Abdelrahman Abdelaziz",
             role: "Sales & Logistics",
+            phone: "+971 588 357 385",
+            email: "sales@ing-construction-materials.com",
             bio: "Abdelrahman specializes in building strong client relationships and ensuring seamless coordination between sales and logistics.",
             image: SALES,
         },
@@ -25,6 +27,8 @@ const About = () => {
             id: 2,
             name: "Sarah Johnson",
             role: "Head Architect",
+            phone: "+123 555 6789",
+            email: "sarah.johnson@example.com",
             bio: "Sarah brings innovative design perspectives and ensures our materials meet the highest architectural standards.",
             image: Architect,
         },
@@ -32,6 +36,8 @@ const About = () => {
             id: 3,
             name: "David Rodriguez",
             role: "Chief Engineer",
+            phone: "+123 444 9876",
+            email: "david.rodriguez@example.com",
             bio: "David's expertise in material science and structural engineering guarantees the technical excellence of our products.",
             image: Engineer,
         },
@@ -39,6 +45,8 @@ const About = () => {
             id: 4,
             name: "Elena Petrova",
             role: "Design Director",
+            phone: "+123 333 4567",
+            email: "elena.petrova@example.com",
             bio: "Elena's keen eye for aesthetics and sustainability shapes our material collections for modern construction needs.",
             image: Designer,
         },
@@ -257,6 +265,14 @@ const About = () => {
                                 <div className="team-content">
                                     <h3>{member.name}</h3>
                                     <p className="team-role">{member.role}</p>
+                                    <div className="team-contact">
+                                        <p>
+                                            <i className="fa-solid fa-phone"></i>{" "}
+                                            {member.phone}
+                                        </p>
+                                        <p>✉ {member.email}</p>
+                                    </div>
+
                                     <p className="team-bio">{member.bio}</p>
                                 </div>
                             </motion.div>

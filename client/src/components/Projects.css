@@ -75,7 +75,12 @@
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     height: 380px;
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.projects-card.expanded {
+    height: auto;
+    min-height: 380px;
 }
 
 .projects-card-image-container {
@@ -133,10 +138,17 @@
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--champagne);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     line-height: 1.3;
     position: relative;
     padding-bottom: 12px;
+}
+
+.project-description {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
 }
 
 .projects-card-content h3::after {
@@ -171,7 +183,16 @@
     font-size: 0.9rem;
     line-height: 1.6;
     color: rgba(10, 232, 199, 0.99);
+    margin-bottom: 16px;
+}
+
+.project-detailed-info {
     margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(7, 7, 7, 0.7);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
 
 .projects-view-details-button {
@@ -196,6 +217,10 @@
 .projects-view-details-button:hover {
     background-color: #1f9e85;
     letter-spacing: 1px;
+}
+
+.projects-view-details-button .rotated {
+    transform: rotate(180deg);
 }
 
 .projects-view-all-container {
@@ -267,6 +292,11 @@
     .projects-card {
         height: 400px;
     }
+
+    .projects-card.expanded {
+        height: auto;
+        min-height: 400px;
+    }
 }
 
 /* Tablet */
@@ -284,6 +314,11 @@
         border-radius: 16px;
     }
 
+    .projects-card.expanded {
+        height: auto;
+        min-height: 450px;
+    }
+
     .projects-card-overlay {
         padding: 30px;
     }
@@ -299,8 +334,9 @@
         transition: all 0.4s ease;
     }
 
-    .projects-card:hover .projects-hover-content {
-        max-height: 300px;
+    .projects-card:hover .projects-hover-content,
+    .projects-card.expanded .projects-hover-content {
+        max-height: 500px;
         opacity: 1;
         margin-top: 20px;
     }
@@ -322,6 +358,11 @@
 
     .projects-card {
         height: 500px;
+    }
+
+    .projects-card.expanded {
+        height: auto;
+        min-height: 500px;
     }
 
     .projects-card-content h3 {
