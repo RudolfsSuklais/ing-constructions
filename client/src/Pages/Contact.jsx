@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "./Contact.css";
 
 // Contact images
-import NefertityOffice from "../assets/Nefertity_office.png";
+import NefertityOffice from "../assets/nefertity_office.png";
 import LondonOffice from "../assets/london_office.jpg";
 import SwedenOffice from "../assets/sweden_office.jpg";
 
