@@ -6,7 +6,7 @@ import Binghatti from "../assets/logos/binghatti.png";
 import Damac from "../assets/logos/damac.jpg";
 import Emaar from "../assets/logos/emaar.png";
 import Nakheel from "../assets/logos/nakheel.png";
-import Meraas from "../assets/logos/meraas.jpg";
+import Meraas from "../assets/logos/Meraas.jpg";
 import Sobha from "../assets/logos/sobha.png";
 import Azizi from "../assets/logos/azizi.webp";
 import Dubai from "../assets/logos/dubai.png";
