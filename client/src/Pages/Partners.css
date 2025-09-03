@@ -9,12 +9,20 @@
     --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
+/* Prevent horizontal scroll globally */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 .partners-page {
     background-color: var(--slate-dark);
     padding-top: 150px;
     color: var(--champagne);
     position: relative;
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .partners-page::before {
@@ -46,6 +54,7 @@
     position: relative;
     display: flex;
     z-index: 2;
+    padding: 0 20px;
 }
 
 .section-title {
@@ -77,6 +86,8 @@
     margin: 0 auto 80px;
     padding: 0 20px;
     gap: 40px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .map-container {
@@ -87,6 +98,7 @@
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     position: relative;
+    max-width: 100%;
 }
 
 .map-legend {
@@ -97,6 +109,7 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     height: fit-content;
+    max-width: 100%;
 }
 
 .map-legend h3 {
@@ -162,6 +175,8 @@
     max-width: 1400px;
     margin: 0 auto 60px;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .filter-container {
@@ -169,6 +184,7 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
+    max-width: 100%;
 }
 
 .filter-button {
@@ -181,6 +197,7 @@
     transition: all 0.3s ease;
     font-size: 0.9rem;
     text-transform: capitalize;
+    flex-shrink: 0;
 }
 
 .filter-button:hover {
@@ -199,12 +216,15 @@
     max-width: 1400px;
     margin: 0 auto 100px;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .partners-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
+    width: 100%;
 }
 
 /* World Map Container */
@@ -217,6 +237,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .world-map h3 {
@@ -233,6 +254,10 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .world-map-svg:active {
@@ -315,8 +340,6 @@
     height: 40px;
     object-fit: contain;
     margin-bottom: 10px;
-    /* REMOVED the filter that was making logos white */
-    background: white;
     padding: 5px;
     border-radius: 4px;
 }
@@ -335,85 +358,10 @@
     margin: 0;
 }
 
-/* Map Controls Positioning */
-.map-controls-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10;
-}
-
-.map-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background: rgba(15, 21, 24, 0.8);
-    padding: 10px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 204, 0.2);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.map-control-btn {
-    background: rgba(26, 34, 38, 0.8);
-    border: 1px solid rgba(0, 255, 204, 0.3);
-    color: var(--champagne);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.map-control-btn:hover {
-    background: var(--gold-accent);
-    color: var(--slate-dark);
-    border-color: var(--gold-accent);
-    transform: scale(1.1);
-}
-
 /* Map Header adjustments */
 .map-header {
     margin-bottom: 15px;
     text-align: center;
-}
-
-.zoom-instruction {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 0.85rem;
-    color: rgba(232, 241, 232, 0.7);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .map-tooltip {
-        max-width: 160px;
-        padding: 10px;
-    }
-
-    .tooltip-logo {
-        width: 40px;
-        height: 30px;
-    }
-
-    .tooltip-content h4 {
-        font-size: 0.9rem;
-    }
-
-    .tooltip-content p {
-        font-size: 0.8rem;
-    }
-}
-
-.map-tooltip strong {
-    color: var(--gold-accent);
-    display: block;
-    margin-bottom: 5px;
 }
 
 /* Partner Cards */
@@ -423,6 +371,7 @@
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
+    width: 100%;
 }
 
 .partner-card-inner {
@@ -571,6 +520,7 @@
     z-index: 1000;
     padding: 20px;
     backdrop-filter: blur(5px);
+    box-sizing: border-box;
 }
 
 .modal-content {
@@ -583,6 +533,7 @@
     position: relative;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
     padding: 40px;
+    box-sizing: border-box;
 }
 
 .close-modal {
@@ -673,6 +624,7 @@
     text-align: center;
     position: relative;
     z-index: 2;
+    padding: 0 20px;
 }
 
 .partners-cta h2 {
@@ -701,102 +653,332 @@
     gap: 20px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
+.view-all-button, .view-all-button-secondary {
+    background: var(--gold-accent);
+    color: var(--slate-dark);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-all-button-secondary {
+    background: transparent;
+    color: var(--champagne);
+    border: 1px solid rgba(232, 241, 232, 0.2);
+}
+
+.view-all-button:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+}
+
+.view-all-button-secondary:hover {
+    border-color: var(--gold-accent);
+    color: var(--gold-accent);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .partners-page {
+        padding-top: 120px;
+        overflow-x: hidden;
+    }
+    
     .partners-map-section {
         flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+        margin: 0 auto 60px;
     }
 
     .map-container {
-        height: 400px;
+        height: 300px;
+        order: 2;
+        width: 100%;
     }
 
-    .partners-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    .map-legend {
+        order: 1;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .partners-hero {
+        margin: 0 auto 60px;
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-size: 2.4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
     }
 
-    .map-controls-container {
-        bottom: 15px;
-        right: 15px;
+    /* Mobile map tabs */
+    .mobile-map-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(232, 241, 232, 0.2);
+        width: 100%;
     }
 
+    .mobile-map-tabs button {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--champagne);
+        padding: 12px;
+        opacity: 0.7;
+        position: relative;
+        font-size: 0.9rem;
+    }
+
+    .mobile-map-tabs button.active {
+        opacity: 1;
+        color: var(--gold-accent);
+    }
+
+    .mobile-map-tabs button.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--gold-accent);
+    }
+
+    /* Mobile partners list */
+    .mobile-partners-list {
+        width: 100%;
+        order: 3;
+    }
+
+    .partners-swiper {
+        padding: 10px 0 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .mobile-partner-item {
+        background: rgba(26, 34, 38, 0.8);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .mobile-partner-item:active {
+        transform: scale(0.98);
+    }
+
+    .mobile-partner-item img {
+        max-height: 50px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+
+    .mobile-partner-item h4 {
+        color: var(--champagne);
+        margin-bottom: 5px;
+        font-size: 1rem;
+    }
+
+    .mobile-partner-item p {
+        color: var(--champagne-light);
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .partner-category {
+        background: var(--gold-accent);
+        color: var(--slate-dark);
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    /* Enhanced touch controls */
     .map-controls {
+        flex-direction: row;
+        bottom: 10px;
+        right: 10px;
         padding: 8px;
     }
 
     .map-control-btn {
-        width: 32px;
-        height: 32px;
+        width: 44px;
+        height: 44px;
     }
-}
 
-@media (max-width: 768px) {
+    /* Make partner markers larger for touch */
+    .partner-marker {
+        r: 12px !important;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* Improve tooltip for touch */
+    .map-tooltip {
+        max-width: 200px;
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .tooltip-logo {
+        width: 40px;
+        height: 30px;
+    }
+    
+    /* Filter buttons scroll */
+    .filter-container {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        max-width: 100vw;
+    }
+    
+    .filter-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .filter-button {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    
+    /* Partners grid */
     .partners-grid {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        max-width: 100%;
         margin: 0 auto;
+        gap: 20px;
     }
-
+    
+    .partner-card {
+        height: 650px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .partner-info {
+        padding: 20px;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        margin: 0 15px;
+        width: calc(100% - 30px);
+        padding: 30px 20px;
+    }
+    
     .modal-stats {
         grid-template-columns: 1fr;
     }
-
+    
+    /* CTA adjustments */
+    .partners-cta {
+        padding: 0 15px 100px;
+    }
+    
     .cta-actions {
         flex-direction: column;
         align-items: center;
     }
-
-    .section-title {
-        font-size: 2.4rem;
+    
+    .partners-cta h2 {
+        font-size: 2.2rem;
     }
-
-    .map-controls-container {
-        bottom: 10px;
-        right: 10px;
-    }
-
-    .map-controls {
-        flex-direction: row;
-        padding: 6px;
-    }
-
-    .map-control-btn {
-        width: 30px;
-        height: 30px;
-    }
-
-    .map-control-btn svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    .world-map-svg {
-        height: 300px;
-    }
-
+    
+    /* World map adjustments */
     .world-map {
-        padding: 10px;
+        padding: 15px;
     }
-
-    .map-container {
-        height: 350px;
+    
+    .world-map h3 {
+        font-size: 1.3rem;
+    }
+    
+    .zoom-instruction {
+        font-size: 0.8rem;
     }
 }
 
+/* Additional improvements for very small devices */
 @media (max-width: 480px) {
-    .partner-card {
-        height: 350px;
+    .map-container {
+        height: 250px;
     }
 
-    .partner-info {
-        padding: 20px;
+    .mobile-partner-item {
+        height: 160px;
+        padding: 15px;
     }
 
-    .modal-content {
-        padding: 30px 20px;
+    .mobile-partner-item img {
+        max-height: 40px;
     }
 
-    .partners-cta h2 {
+    .map-control-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .section-title {
         font-size: 2rem;
     }
+    
+    .partner-card {
+        height: 600px;
+    }
+    
+    .partner-logo-container {
+        padding: 20px;
+    }
+    
+    .partners-cta h2 {
+        font-size: 1.8rem;
+    }
+    
+    .view-all-button, .view-all-button-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Ensure no element causes horizontal overflow */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix any potential horizontal scroll caused by animations */
+.partner-card-inner {
+    transform: none !important;
+}
+
+.container, .map-container, .partners-grid {
+    max-width: 100vw;
 }

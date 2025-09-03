@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import * as d3 from "d3";
 import * as d3Geo from "d3-geo";
-import * as topojson from "topojson-client";
+import { feature } from "topojson-client";
 import "./Partners.css";
 
 // Example partner logos (replace with actual partner logos)
@@ -18,11 +18,29 @@ const Partners = () => {
     const [selectedPartner, setSelectedPartner] = useState(null);
     const [hoveredPartner, setHoveredPartner] = useState(null);
     const [worldData, setWorldData] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [activeMapTab, setActiveMapTab] = useState("map");
+
     const mapRef = useRef(null);
     const svgRef = useRef(null);
     const zoom = useRef(null);
     const projection = useRef(null);
     const path = useRef(null);
+    const lastTouchTime = useRef(0);
+
+    // Check if device is mobile
+    useEffect(() => {
+        const checkIsMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkIsMobile();
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -103,27 +121,28 @@ const Partners = () => {
             .then((response) => response.json())
             .then((worldData) => {
                 setWorldData(worldData);
+            })
+            .catch((error) => {
+                console.error("Failed to load map data:", error);
             });
     }, []);
 
-    useEffect(() => {
-        if (worldData && svgRef.current) {
-            initializeMap();
-        }
-    }, [worldData]);
+    const initializeMap = useCallback(() => {
+        if (!worldData || !svgRef.current) return;
 
-    useEffect(() => {
-        // Update markers when selection changes
-        updateMarkers();
-    }, [hoveredPartner, selectedPartner]);
-
-    const initializeMap = () => {
-        const width = 800;
-        const height = 450;
+        const width = isMobile ? Math.min(800, window.innerWidth - 40) : 800;
+        const height = isMobile ? 300 : 450;
         const svg = d3.select(svgRef.current);
 
         // Clear previous map
         svg.selectAll("*").remove();
+
+        // Set the SVG dimensions for mobile
+        if (isMobile) {
+            svg.attr("width", "100%")
+                .attr("height", "100%")
+                .attr("viewBox", `0 0 ${width} ${height}`);
+        }
 
         // Create a group for the map that will be transformed
         const mapGroup = svg.append("g").attr("class", "map-group");
@@ -131,7 +150,7 @@ const Partners = () => {
         // Create projection
         projection.current = d3Geo
             .geoMercator()
-            .scale(130)
+            .scale(isMobile ? 100 : 130)
             .center([0, 30])
             .translate([width / 2, height / 2]);
 
@@ -142,10 +161,7 @@ const Partners = () => {
         mapGroup
             .append("g")
             .selectAll("path")
-            .data(
-                topojson.feature(worldData, worldData.objects.countries)
-                    .features
-            )
+            .data(feature(worldData, worldData.objects.countries).features)
             .enter()
             .append("path")
             .attr("d", path.current)
@@ -158,7 +174,18 @@ const Partners = () => {
 
         // Set up zoom behavior
         setupZoom();
-    };
+    }, [worldData, isMobile]);
+
+    useEffect(() => {
+        if (worldData && svgRef.current) {
+            initializeMap();
+        }
+    }, [worldData, initializeMap]);
+
+    useEffect(() => {
+        // Update markers when selection changes
+        updateMarkers();
+    }, [hoveredPartner, selectedPartner]);
 
     const drawMarkers = () => {
         const svg = d3.select(svgRef.current);
@@ -169,7 +196,7 @@ const Partners = () => {
         mapGroup.selectAll(".partner-label").remove();
         mapGroup.selectAll(".partner-logo").remove();
 
-        // Draw partner markers with larger size
+        // Draw partner markers with larger size for mobile
         mapGroup
             .selectAll(".partner-marker")
             .data(partners)
@@ -185,15 +212,17 @@ const Partners = () => {
                 (d) => projection.current([d.location.lng, d.location.lat])[1]
             )
             .attr("r", (d) => {
-                if (selectedPartner && selectedPartner.id === d.id) return 12;
-                if (hoveredPartner === d.id) return 10;
-                return 8;
+                if (selectedPartner && selectedPartner.id === d.id)
+                    return isMobile ? 16 : 12;
+                if (hoveredPartner === d.id) return isMobile ? 14 : 10;
+                return isMobile ? 12 : 8;
             })
             .attr("fill", (d) => categoryColors[d.category])
             .attr("stroke", "#0f1518")
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .on("mouseover", (event, d) => {
+                if (isMobile) return; // Disable hover effects on mobile
                 setHoveredPartner(d.id);
                 // Add tooltip with logo
                 const tooltip = d3.select("#map-tooltip");
@@ -212,6 +241,7 @@ const Partners = () => {
                     .style("top", event.pageY - 100 + "px");
             })
             .on("mouseout", () => {
+                if (isMobile) return;
                 setHoveredPartner(null);
                 d3.select("#map-tooltip").style("opacity", 0);
             })
@@ -242,7 +272,7 @@ const Partners = () => {
             .text((d) => d.name)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
-            .style("font-size", "12px")
+            .style("font-size", isMobile ? "14px" : "12px")
             .style("pointer-events", "none")
             .style("paint-order", "stroke")
             .style("stroke", "#1a2226")
@@ -259,9 +289,10 @@ const Partners = () => {
         mapGroup
             .selectAll(".partner-marker")
             .attr("r", (d) => {
-                if (selectedPartner && selectedPartner.id === d.id) return 12;
-                if (hoveredPartner === d.id) return 10;
-                return 8;
+                if (selectedPartner && selectedPartner.id === d.id)
+                    return isMobile ? 16 : 12;
+                if (hoveredPartner === d.id) return isMobile ? 14 : 10;
+                return isMobile ? 12 : 8;
             })
             .attr("stroke-width", (d) => {
                 if (selectedPartner && selectedPartner.id === d.id) return 3;
@@ -296,7 +327,7 @@ const Partners = () => {
             .text((d) => d.name)
             .attr("text-anchor", "middle")
             .attr("fill", "#fff")
-            .style("font-size", "12px")
+            .style("font-size", isMobile ? "14px" : "12px")
             .style("pointer-events", "none")
             .style("paint-order", "stroke")
             .style("stroke", "#1a2226")
@@ -308,34 +339,61 @@ const Partners = () => {
     const setupZoom = () => {
         const svg = d3.select(svgRef.current);
 
-        // Set up zoom behavior
+        // Set up zoom behavior with better touch support
         zoom.current = d3
             .zoom()
             .scaleExtent([0.5, 8])
+            .filter((event) => {
+                // Enable zoom on touch devices with two fingers
+                if (event.type === "wheel") return true;
+                if (event.type.includes("touch")) {
+                    return event.touches.length === 2;
+                }
+                return true;
+            })
             .on("zoom", (event) => {
                 const { transform } = event;
 
-                // Apply the transform to the map group (which includes markers)
+                // Apply the transform to the map group
                 svg.select(".map-group").attr("transform", transform);
 
                 // Adjust marker sizes based on zoom level
                 svg.selectAll(".partner-marker").attr("r", (d) => {
-                    let baseSize = 8;
+                    let baseSize = isMobile ? 12 : 8;
                     if (selectedPartner && selectedPartner.id === d.id)
-                        baseSize = 12;
-                    if (hoveredPartner === d.id) baseSize = 10;
+                        baseSize = isMobile ? 16 : 12;
+                    if (hoveredPartner === d.id) baseSize = isMobile ? 14 : 10;
                     return baseSize / transform.k;
                 });
 
                 // Adjust label sizes based on zoom level
                 svg.selectAll(".partner-label").style(
                     "font-size",
-                    `${12 / transform.k}px`
+                    `${(isMobile ? 14 : 12) / transform.k}px`
                 );
             });
 
         // Apply zoom behavior to the SVG
         svg.call(zoom.current);
+
+        // Add double-tap to zoom for mobile
+        if (isMobile) {
+            svg.on("dblclick.zoom", null); // Remove default double-click zoom
+            svg.on("touchstart", function (event) {
+                const now = new Date().getTime();
+                const timesince = now - (lastTouchTime.current || 0);
+
+                if (timesince < 300 && timesince > 0) {
+                    // Double-tap detected
+                    event.preventDefault();
+                    const point = d3.pointer(event, this);
+                    const clickedScale = zoom.current.scale() * 1.8;
+                    zoom.current.scaleTo(svg, clickedScale);
+                }
+
+                lastTouchTime.current = now;
+            });
+        }
     };
 
     const handleZoomIn = () => {
@@ -366,9 +424,32 @@ const Partners = () => {
 
     const handlePartnerSelect = (partner) => {
         setSelectedPartner(partner);
-        // Scroll to map
-        if (mapRef.current) {
+
+        // On mobile, show modal immediately instead of scrolling to map
+        if (!isMobile && mapRef.current) {
             mapRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Center map on selected partner for mobile
+        if (isMobile && svgRef.current && projection.current) {
+            const svg = d3.select(svgRef.current);
+            const [x, y] = projection.current([
+                partner.location.lng,
+                partner.location.lat,
+            ]);
+
+            // Calculate transform to center on this point
+            const width = Math.min(800, window.innerWidth - 40);
+            const height = 300;
+            const scale = 2; // Zoom level when selecting a partner
+
+            const transform = d3.zoomIdentity
+                .translate(width / 2 - x * scale, height / 2 - y * scale)
+                .scale(scale);
+
+            svg.transition()
+                .duration(750)
+                .call(zoom.current.transform, transform);
         }
     };
 
@@ -444,13 +525,37 @@ const Partners = () => {
 
             {/* Interactive Map Section */}
             <section className="partners-map-section" ref={mapRef}>
-                <div className="map-container">
+                {/* Mobile Tabs for switching between map and list view */}
+                {isMobile && (
+                    <div className="mobile-map-tabs">
+                        <button
+                            className={activeMapTab === "map" ? "active" : ""}
+                            onClick={() => setActiveMapTab("map")}>
+                            Map View
+                        </button>
+                        <button
+                            className={activeMapTab === "list" ? "active" : ""}
+                            onClick={() => setActiveMapTab("list")}>
+                            List View
+                        </button>
+                    </div>
+                )}
+
+                {/* Map Container - hidden on mobile when in list view */}
+                <div
+                    className={`map-container ${
+                        isMobile && activeMapTab !== "map" ? "hidden" : ""
+                    }`}>
                     <div className="world-map">
                         <div className="map-header">
                             <h3>Our Global Partners Network</h3>
                         </div>
                         <div className="zoom-instruction">
-                            <span>Use mouse wheel to zoom, drag to pan</span>
+                            <span>
+                                {isMobile
+                                    ? "Pinch to zoom, drag to pan"
+                                    : "Use mouse wheel to zoom, drag to pan"}
+                            </span>
                         </div>
                         <svg
                             ref={svgRef}
@@ -562,7 +667,37 @@ const Partners = () => {
                         </div>
                     </div>
                 </div>
-                <div className="map-legend">
+
+                {/* Mobile List View */}
+                {isMobile && activeMapTab === "list" && (
+                    <div className="mobile-partners-list">
+                        <div className="partners-swiper">
+                            {partners.map((partner) => (
+                                <div
+                                    key={partner.id}
+                                    className="mobile-partner-item"
+                                    onClick={() =>
+                                        handlePartnerSelect(partner)
+                                    }>
+                                    <img
+                                        src={partner.logo}
+                                        alt={partner.name}
+                                    />
+                                    <h4>{partner.name}</h4>
+                                    <p>{partner.location.country}</p>
+                                    <span className="partner-category">
+                                        {partner.category}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                <div
+                    className={`map-legend ${
+                        isMobile && activeMapTab !== "map" ? "hidden" : ""
+                    }`}>
                     <h3>Global Presence</h3>
                     <p>
                         Our partners span across{" "}
@@ -615,8 +750,12 @@ const Partners = () => {
                             variants={cardVariants}
                             key={partner.id}
                             onClick={() => handlePartnerSelect(partner)}
-                            onMouseEnter={() => setHoveredPartner(partner.id)}
-                            onMouseLeave={() => setHoveredPartner(null)}>
+                            onMouseEnter={() =>
+                                !isMobile && setHoveredPartner(partner.id)
+                            }
+                            onMouseLeave={() =>
+                                !isMobile && setHoveredPartner(null)
+                            }>
                             <div className="partner-card-inner">
                                 <div className="partner-logo-container">
                                     <img

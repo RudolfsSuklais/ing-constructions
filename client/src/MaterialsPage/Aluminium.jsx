@@ -6,6 +6,12 @@ import "./Aluminium.css";
 import SlidingDoorImg from "../assets/materials/aluminium-facade.jpg";
 import WindowImg from "../assets/materials/aluminium-facade.jpg";
 import FacadeImg from "../assets/materials/aluminium-facade.jpg";
+import Rabel35000 from "../assets/Rabel-35000.webp";
+import Rabel15000 from "../assets/Rabel-15000.webp";
+import R2A3074Low from "../assets/R2A3074-low.jpg";
+import Rabel87001 from "../assets/Rabel-8700-1.webp";
+import Rabel36501 from "../assets/Rabel-3650-1.webp";
+import Rabel80002 from "../assets/Rabel-8000-2.webp";
 
 // Manufacturer product data
 const manufacturersData = [
@@ -55,17 +61,49 @@ const manufacturersData = [
         products: [
             {
                 id: 5,
-                name: "Rabel Envelop 3D",
-                type: "Facade",
-                image: WindowImg,
-                specs: "Slim, seamless, and highly flexible facade system.",
+                name: "Rabel 35000",
+                type: "Curtain Wall",
+                image: Rabel35000,
+                specs: "Super Thermal has been engineered to make large full glass facades spanning up to 6.5 meters from slap to slap with or without transoms",
             },
             {
                 id: 6,
-                name: "Facade AL-Pro",
-                type: "Facade",
-                image: FacadeImg,
-                specs: "Unitized system, Quick installation",
+                name: "Rabel 15000",
+                type: "Façade System",
+                image: Rabel15000,
+                specs: "The Rabel 15000 Slim Super Thermal is a façade system designed for large, seamless glass surfaces with hidden supports, strong thermal performance, and cost efficiency.",
+            },
+
+            {
+                id: 7,
+                name: "Rabel 62",
+                type: "Minimal Sliding Door",
+                image: R2A3074Low,
+                specs: "The Rabel 62 Minimal Super Thermal is a slim, high-performance system for large openings, supporting up to 6 m heights with heavy-duty rollers and versatile thresholds.",
+            },
+
+            {
+                id: 8,
+                name: "Rabel 8700",
+                type: "Minimal Casement System",
+                image: Rabel87001,
+                specs: "The Rabel 62 Minimal Super Thermal is a slim, high-performance system for large openings, supporting up to 6 m heights with heavy-duty rollers and versatile thresholds.",
+            },
+
+            {
+                id: 9,
+                name: "Rabel 3650",
+                type: "Bi-Fold System, Top Hang",
+                image: Rabel36501,
+                specs: "The Rabel3650 Super Thermal is a high-insulation fold-and-slide door system up to 3.5 m high, featuring versatile thresholds, excellent water and air tightness, and customizable locking options.",
+            },
+
+            {
+                id: 10,
+                name: "Rabel 8000",
+                type: "Pivot Entrance Door",
+                image: Rabel80002,
+                specs: "The Rabel 8000 Pivot Door is a durable, high-security entrance system with smooth operation, versatile finishes, and standard three-point locking.",
             },
         ],
     },
