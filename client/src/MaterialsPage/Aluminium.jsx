@@ -12,6 +12,12 @@ import R2A3074Low from "../assets/R2A3074-low.jpg";
 import Rabel87001 from "../assets/Rabel-8700-1.webp";
 import Rabel36501 from "../assets/Rabel-3650-1.webp";
 import Rabel80002 from "../assets/Rabel-8000-2.webp";
+import Finestra1 from "../assets/automatic_sliding.webp";
+import Finestra2 from "../assets/facade_finestra.webp";
+import Finestra3 from "../assets/pe78_windows.webp";
+import Finestra4 from "../assets/pe78_design_ei60.webp";
+import Finestra5 from "../assets/pe78_fold.webp";
+import Finestra6 from "../assets/sl1800tt.webp";
 
 // Manufacturer product data
 const manufacturersData = [
@@ -21,17 +27,49 @@ const manufacturersData = [
         products: [
             {
                 id: 1,
-                name: "Sliding Door SC-100",
+                name: "Automatic Sliding Doors",
                 type: "Sliding Door",
-                image: SlidingDoorImg,
-                specs: "Thermal break technology, U-value: 1.2 W/m²K",
+                image: Finestra1,
+                specs: "A new sliding door solution with ESCO automatic drives has been tested in accordance with EN 16361+A1 and EN 16005, proving durable through 1,000,000 opening and closing cycles while ensuring maximum safety and finger protection.",
             },
             {
                 id: 2,
-                name: "Window SC-200",
-                type: "Window",
-                image: WindowImg,
-                specs: "Double glazing, Acoustic insulation: 42 dB",
+                name: "Facade PF152HI",
+                type: "Facade",
+                image: Finestra2,
+                specs: "A mullion-transom system for curtain walls, roofs, and rooflights offers high thermal insulation, sound reduction, watertightness, wind resistance, versatile design options, and even fire-resistant solutions, with external cover profiles starting from 51 mm.",
+            },
+
+            {
+                id: 3,
+                name: "Windows PE78N/PE78NHI",
+                type: "Windows",
+                image: Finestra3,
+                specs: "An insulated aluminium profile system for high-performance windows features a 42 mm multi-cavity thermal break, flexible design options, and multiple opening types, ensuring excellent thermal insulation, durability, and versatility.",
+            },
+
+            {
+                id: 4,
+                name: "Door PE78EI DESIGN LINE class EI60",
+                type: "Fireproof door",
+                image: Finestra4,
+                specs: "A three-cavity profile system for internal and external fire barriers offers innovative single-side glazing, faster assembly, compatibility with EI30–EI120 fire-resistant structures, and solutions for smoke control and evacuation routes.",
+            },
+
+            {
+                id: 5,
+                name: "PE78 FOLD patio doors",
+                type: "Fold patio doors",
+                image: Finestra5,
+                specs: "An ideal system for homes, restaurants, and cafés, this solution seamlessly connects indoor and outdoor spaces with durable multi-sash designs, high thermal insulation, wide glazing options, and versatile threshold solutions.",
+            },
+
+            {
+                id: 6,
+                name: "Sliding door SL1800TT",
+                type: "Sliding door",
+                image: Finestra6,
+                specs: "An ideal system for homes, restaurants, and cafés, this solution seamlessly connects indoor and outdoor spaces with durable multi-sash designs, high thermal insulation, wide glazing options, and versatile threshold solutions.",
             },
         ],
     },
@@ -40,14 +78,14 @@ const manufacturersData = [
         description: "Innovative and energy-efficient aluminium solutions.",
         products: [
             {
-                id: 3,
+                id: 7,
                 name: "Sliding Door RY-300",
                 type: "Sliding Door",
                 image: SlidingDoorImg,
                 specs: "Slim profiles, Max panel size: 3m x 2.4m",
             },
             {
-                id: 4,
+                id: 8,
                 name: "Facade RY-GlassWall",
                 type: "Facade System",
                 image: FacadeImg,

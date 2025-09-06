@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import "./Materials.css";
 
 // Example product category images (replace with yours)
-import AluminiumImg from "../assets/materials/aluminium-facade.jpg";
-import WoodImg from "../assets/materials/osb.jpg";
+import AluminiumImg from "../assets/aluminium-facade-2.webp";
+import WoodImg from "../assets/wooden_facade.jpg";
 import ConcreteImg from "../assets/materials/concrete.jpg";
 import GlassImg from "../assets/materials/glass-facade.jpg";
 import RoofingImg from "../assets/materials/roofing.png";
 import MarbleImg from "../assets/materials/marble.jpg";
-import SteelImg from "../assets/materials/steel.jpg";
+import SteelImg from "../assets/materials/steel_bar.jpeg";
 import InsulationImg from "../assets/materials/insulation.jpeg";
 import CeramicImg from "../assets/materials/ceramic-tiles.jpeg";
 
@@ -61,7 +61,7 @@ const Materials = () => {
         },
         {
             id: "wood",
-            name: "Wood Products",
+            name: "Timber Products",
             description:
                 "Sustainable timber, plywood, MDF and engineered wood solutions.",
             image: WoodImg,
@@ -73,13 +73,7 @@ const Materials = () => {
                 "Architectural concrete, bricks and innovative masonry solutions.",
             image: ConcreteImg,
         },
-        {
-            id: "glass",
-            name: "Glass & Facade Systems",
-            description:
-                "Curtain walls, smart glass and high-performance glazing systems.",
-            image: GlassImg,
-        },
+
         {
             id: "roofing",
             name: "Roofing Systems",
