@@ -70,6 +70,7 @@
     font-weight: 300;
     opacity: 0.8;
     animation: fadeInUp 1s ease-out 0.2s both;
+    margin: auto;
 }
 
 /* Countdown Section */

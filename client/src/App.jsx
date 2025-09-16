@@ -14,6 +14,8 @@ import ProjectsPage from "./Pages/ProjectsPage.jsx";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import TermsOfService from "./Pages/TermsOfService.jsx";
 import ModularHousing from "./Pages/ModularHousing.jsx";
+import RequestQuote from "./MaterialsPage/RequestQuote.jsx";
+import Timber from "./MaterialsPage/Timber.jsx";
 
 function App() {
     return (
@@ -26,12 +28,14 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/materials/aluminium" element={<Aluminium />} />
+                <Route path="/materials/wood" element={<Timber />} />
                 <Route path="/materials" element={<Materials />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/partners" element={<Partners />} />
                 <Route path="/modular-housing" element={<ModularHousing />} />
+                <Route path="/request-quote" element={<RequestQuote />} />
                 <Route
                     path="/materials/docs/:materialId"
                     element={<MaterialDocPage />}

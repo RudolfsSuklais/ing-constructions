@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./Aluminium.css";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // Example product images (replace with real product images later)
 import SlidingDoorImg from "../assets/materials/aluminium-facade.jpg";
@@ -165,8 +167,12 @@ const cardVariants = {
 };
 
 const Aluminium = () => {
-    const [selectedManufacturer, setSelectedManufacturer] = useState(0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [selectedManufacturer, setSelectedManufacturer] = useState(
+        location.state?.manufacturerIndex || 0
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -188,7 +194,8 @@ const Aluminium = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="section-title">
+                        className="section-title"
+                    >
                         <span className="accent-1">Premium </span>
                         <span className="highlight">Aluminium Products</span>
                     </motion.h1>
@@ -196,7 +203,8 @@ const Aluminium = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 0.8 }}
                         transition={{ delay: 0.3, duration: 0.8 }}
-                        className="hero-subtitle">
+                        className="hero-subtitle"
+                    >
                         Discover aluminium windows, doors, and facades from
                         world-class manufacturers.
                     </motion.p>
@@ -214,7 +222,8 @@ const Aluminium = () => {
                                 selectedManufacturer === index ? "active" : ""
                             }`}
                             onClick={() => setSelectedManufacturer(index)}
-                            aria-label={`View products from ${manufacturer.name}`}>
+                            aria-label={`View products from ${manufacturer.name}`}
+                        >
                             {manufacturer.name}
                         </button>
                     ))}
@@ -225,7 +234,8 @@ const Aluminium = () => {
                     className="manufacturer-description"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}>
+                    transition={{ duration: 0.5 }}
+                >
                     <p>{manufacturersData[selectedManufacturer].description}</p>
                 </motion.div>
             </div>
@@ -242,7 +252,8 @@ const Aluminium = () => {
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={cardVariants}
                                 key={product.id}
-                                transition={{ delay: index * 0.1 }}>
+                                transition={{ delay: index * 0.1 }}
+                            >
                                 <div className="card-inner">
                                     <div className="card-image-container">
                                         <img
@@ -266,14 +277,32 @@ const Aluminium = () => {
                                             {product.specs}
                                         </p>
                                         <div className="card-action">
-                                            <button className="view-all-button">
+                                            <button
+                                                className="view-all-button"
+                                                onClick={() =>
+                                                    // In Aluminium.jsx when navigating to quote page:
+                                                    navigate("/request-quote", {
+                                                        state: {
+                                                            product:
+                                                                product.name,
+                                                            manufacturerIndex:
+                                                                selectedManufacturer,
+                                                            manufacturerName:
+                                                                manufacturersData[
+                                                                    selectedManufacturer
+                                                                ].name, // pass name
+                                                        },
+                                                    })
+                                                }
+                                            >
                                                 Request Quote
                                                 <svg
                                                     width="24"
                                                     height="24"
                                                     viewBox="0 0 24 24"
                                                     fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
                                                     <path
                                                         d="M13.5 6H5.25C4.00736 6 3 7.00736 3 8.25V18.75C3 19.9926 4.00736 21 5.25 21H15.75C16.9926 21 18 19.9926 18 18.75V10.5"
                                                         stroke="currentColor"
