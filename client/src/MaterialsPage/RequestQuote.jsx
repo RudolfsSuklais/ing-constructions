@@ -65,9 +65,18 @@ const RequestQuote = () => {
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
-            if (res.ok) setIsSubmitted(true);
-            else alert(data.message);
+            let data;
+            try {
+                data = await res.json(); // safely parse JSON
+            } catch {
+                data = { message: "No response from server" }; // fallback if JSON parsing fails
+            }
+
+            if (res.ok) {
+                setIsSubmitted(true);
+            } else {
+                alert(data.message || "Something went wrong with the request");
+            }
         } catch (err) {
             console.error(err);
             alert("Something went wrong. Please try again.");
