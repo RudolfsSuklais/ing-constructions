@@ -57,10 +57,12 @@ const RequestQuote = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://localhost:5000/send-quote", {
+            const API_BASE = import.meta.env.VITE_API_BASE;
+
+            const res = await fetch(`${API_BASE}/send-quote`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData), // manufacturer is already inside formData
+                body: JSON.stringify(formData),
             });
 
             const data = await res.json();
